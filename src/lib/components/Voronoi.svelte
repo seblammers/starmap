@@ -26,17 +26,19 @@
   $: poly = voronoi.polygons();
 </script>
 
-{#each poly.features as cell}
-  <path
-    d={path(cell.geometry)}
-    opacity="0"
-    fill={colour}
-    stroke={colour}
-    on:mouseover={() => {
-      log(cell);
-    }}
-    on:focus={() => {
-      log(cell);
-    }}
-  />
-{/each}
+<g class="voronoi">
+  {#each poly.features as cell}
+    <path
+      d={path(cell.geometry)}
+      opacity="0"
+      fill={colour}
+      stroke={colour}
+      on:mouseover={() => {
+        log(cell);
+      }}
+      on:focus={() => {
+        log(cell);
+      }}
+    />
+  {/each}
+</g>
