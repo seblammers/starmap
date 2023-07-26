@@ -111,7 +111,7 @@
     yPos.set(initial.y);
   };
 
-  $: console.log("width is now", width);
+  // $: console.log("width is now", width);
 </script>
 
 <div class="chart-container" bind:clientWidth={width}>
@@ -125,8 +125,8 @@
     viewBox="0 0 {width} {height}"
     style:max-width="100%"
     style:height="auto"
-    on:mouseleave={() => (hoveredData = undefined)}
     bind:this={starmap}
+    on:mouseleave={() => (hoveredData = undefined)}
     class:dragging
   >
     <Glow />
