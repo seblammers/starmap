@@ -39,22 +39,23 @@
   style="position: absolute; top: {yPosition}px; left: {xPosition}px"
   bind:clientWidth={tooltipWidth}
 >
+  <h1>Star ID: {data.id}</h1>
   {#if data.meta}
-    {#if data.meta.name}
-      <em>{data.meta.name}</em>
+    {#if data.meta.name != ""}
+      <strong>Star Name:</strong>
+      <em>{data.meta.name}</em><br />
     {/if}
   {/if}
-  <h1>Star ID: {data.id}</h1>
   <strong>Distance:</strong>
   <em>{formatter(data.wiki.light_years)} light years</em><br />
 
   {#if data.wiki.year > 1900}
-    <strong>Date:</strong> <em>{data.wiki.closest_match}</em><br />
+    <strong>Date:</strong> <em>{data.wiki.closest_match}</em><br /><br />
   {:else}
     <strong>Year:</strong> <em>{data.wiki.year}</em><br /><br />
   {/if}
 
-  <strong>Event:</strong> <em>{data.wiki.events}</em>
+  <strong>Event(s):</strong> <em><ul>{@html data.wiki.events}</ul></em>
 </div>
 
 <style>
@@ -68,10 +69,14 @@
     max-width: 30ch;
   }
 
-  h1 {
+  .tooltip > h1 {
     font-size: 1.2rem;
     font-weight: 600;
-    margin-bottom: none;
+    margin-bottom: var(--space-xs) !important;
     width: 100%;
+  }
+  ul {
+    padding: var(--space-xs) var(--space-s);
+    margin-top: var(--space-3xs);
   }
 </style>
