@@ -7,6 +7,7 @@
     geoCircle,
   } from "d3-geo";
   import { onMount } from "svelte";
+  import { writable } from "svelte/store";
   import { select } from "d3-selection";
   import { zoom } from "d3-zoom";
   //import { extent } from "d3-array";
@@ -53,14 +54,9 @@
   import { cubicOut } from "svelte/easing";
 
   // keep track of positions (x,y,z) for panning and zooming
-  let xPos = tweened(initial.x, {
-    duration: 100,
-    easing: cubicOut,
-  });
-  let yPos = tweened(initial.y, {
-    duration: 100,
-    easing: cubicOut,
-  });
+  let xPos = writable(initial.x);
+  let yPos = writable(initial.y);
+
   let kPos = tweened(initial.k, {
     duration: 600,
     easing: cubicOut,
