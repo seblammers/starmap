@@ -6,10 +6,10 @@
   $: stardata = data.data;
 </script>
 
-<h1>Let's start fresh!</h1>
+<h1>Stories from the Stars</h1>
 
-<p>Listen, this is a large thing, but it's going to be ok.</p>
+<p>What happened when the light started travelling towards you?</p>
 
 <Starmap data={stardata} />
 
-<p>Heeeeeeey, it worked kinda like you thought! Nice!</p>
+<p>Turns out, a lot.</p>
