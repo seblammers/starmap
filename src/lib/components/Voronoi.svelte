@@ -1,5 +1,5 @@
 <script>
-  import { getContext, createEventDispatcher } from "svelte";
+  import { createEventDispatcher } from "svelte";
   import { geoVoronoi } from "d3-geo-voronoi";
 
   export let colour = "#03041b";
@@ -21,20 +21,22 @@
       return [d.geometry.coordinates[0][0], d.geometry.coordinates[1][0]];
     })
   );
-  $: mesh = voronoi.cellMesh();
 
   $: poly = voronoi.polygons();
+
+  let isHovered = false;
 </script>
 
 <g class="voronoi">
   {#each poly.features as cell}
     <path
       d={path(cell.geometry)}
-      opacity="0"
+      opacity="0.5"
       fill={colour}
-      stroke={colour}
+      stroke={isHovered == cell ? "#ccc" : colour}
       on:mouseover={() => {
         log(cell);
+        isHovered = cell;
       }}
       on:focus={() => {
         log(cell);

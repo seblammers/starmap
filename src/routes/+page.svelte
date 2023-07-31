@@ -13,3 +13,8 @@
 <Starmap data={stardata} />
 
 <p>Turns out, a lot.</p>
+
+<br /> <br /> <br />
+
+<h3>Methodology</h3>
+<p>Scraping data from wiki.</p>

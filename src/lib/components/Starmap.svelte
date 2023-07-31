@@ -1,46 +1,41 @@
 <script>
   // h/t https://observablehq.com/@pcarleton/visualizing-the-night-sky-working-with-d3-celestial
-  import {
-    geoEqualEarth,
-    geoEquirectangular,
-    geoPath,
-    geoCircle,
-  } from "d3-geo";
+  import { geoEquirectangular, geoPath } from "d3-geo";
   import { onMount } from "svelte";
   import { writable } from "svelte/store";
   import { select } from "d3-selection";
   import { zoom } from "d3-zoom";
-  //import { extent } from "d3-array";
-  import { scaleLinear } from "d3-scale";
   import Tooltip from "./Tooltip.svelte";
   import Voronoi from "./Voronoi.svelte";
   import Glow from "./Glow.svelte";
 
-  let width = 1200;
-  $: height = width / 2;
-  let padding = 10;
-
   // fetch star data
   export let data;
 
-  $: projection = geoEquirectangular()
-    // .fitExtent(
-    //   [
-    //     [10, 10],
-    //     [width - padding, height - padding],
-    //   ],
-    //   data
-    // )
-    .translate([$xPos, $yPos])
-    .scale([$kPos]);
-  $: path = geoPath(projection);
+  // set default width (but adapt to screensize)
+  let width = 1200;
+  $: height = width / 2;
 
-  const initial = {
+  import { resize } from "svelte-resize-observer-action";
+  function onResize(entry) {
+    console.log("Look!", entry.contentRect.width);
+
+    rootX = width / 2;
+    rootY = width / 4;
+    rootK = width / 6;
+
+    console.log({ rootK, rootX, rootY });
+
+    $xPos = rootX;
+    $yPos = rootY;
+    $kPos = rootK;
+  }
+
+  let initial = {
     k: 180,
     x: 600,
     y: 300,
   };
-  $: magFactor = Math.sqrt($kPos / initial.k);
 
   // keep track of hovered stars
   let hoveredData;
@@ -58,9 +53,23 @@
   let yPos = writable(initial.y);
 
   let kPos = tweened(initial.k, {
-    duration: 600,
+    duration: 300,
     easing: cubicOut,
   });
+
+  // TODO: use a resize action to set initial values
+  // see https://svelte.dev/repl/797cfeea31a74871a732e3aad2117b5f?version=4.1.1
+  $: projection = geoEquirectangular()
+    // .fitExtent(
+    //   [
+    //     [10, 10],
+    //     [width - padding, height - padding],
+    //   ],
+    //   data
+    // )
+    .translate([$xPos, $yPos])
+    .scale([$kPos]);
+  $: path = geoPath(projection);
 
   // scale starsize according to magnitude
   function starSize(d) {
@@ -83,9 +92,15 @@
   // keep track of dragging (user "grabs" map)
   let dragging = false;
 
+  let rootX = writable();
+  let rootY = writable();
+  let rootK = writable();
   // handle zooming/panning
   let starmap;
   onMount(() => {
+    rootX = width / 2;
+    rootY = width / 4;
+    rootK = width / 6;
     const element = select(starmap);
     element.call(
       zoom()
@@ -100,17 +115,23 @@
 
   // helper to zoom out to initial positions
   let handleReset = () => {
-    const currentK = $kPos;
-    // if zoomed in more, take longer to zoom out too
-    kPos.set(initial.k, { duration: currentK });
+    // get current k as zoom duration (more zoom, more time),
+    // but set a max of 4 seconds, even if zoomed in very deep.
+    const zoomDuration = Math.min($kPos, 4000);
+
+    // if zoomed in more, take longer to zoom out
+    kPos.set(initial.k, { duration: zoomDuration });
     xPos.set(initial.x);
     yPos.set(initial.y);
   };
 
-  // $: console.log("width is now", width);
+  $: console.log("width is now", width);
+
+  // helper to slightly scale stars on zoom
+  $: magFactor = Math.sqrt($kPos / initial.k);
 </script>
 
-<div class="chart-container" bind:clientWidth={width}>
+<div class="chart-container" bind:clientWidth={width} use:resize={onResize}>
   <button on:click={handleReset}> Reset </button>
 
   <button on:click={() => ($kPos += 100)}> + </button>
@@ -156,7 +177,7 @@
   }
   .chart-container {
     position: relative;
-    max-width: 1200px;
+    max-width: 2400px;
     margin: 0 auto;
   }
   .dragging {

@@ -15,8 +15,12 @@
 		"d3-geo": "^3.1.0",
 		"d3-geo-projection": "^4.0.0",
 		"d3-geo-voronoi": "^2.0.1",
+		"element-resize-detector": "^1.2.4",
 		"svelte": "^3.54.0",
 		"vite": "^4.0.0"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"svelte-resize-observer-action": "^0.0.3"
+	}
 }
