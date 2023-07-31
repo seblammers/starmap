@@ -73,6 +73,9 @@
 
     if (event.sourceEvent.constructor.name == "WheelEvent") {
       // only mess with k when zooming
+
+      console.log(event.sourceEvent);
+
       $zoomK = event.transform.k;
     } else {
       // set new values for zoom-variables
@@ -196,16 +199,17 @@
 
 <style>
   svg {
-    background-color: #03041b;
+    background-color: var(--dark);
     stroke: none;
     cursor: pointer;
   }
-  .chart-container {
-    position: relative;
-    max-width: 90vw;
-    margin: 0 auto;
-  }
+
   .dragging {
     cursor: grabbing;
+  }
+
+  button {
+    font-family: var(--primaryFont);
+    font-size: var(--step-0);
   }
 </style>

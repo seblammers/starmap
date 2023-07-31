@@ -6,7 +6,7 @@
   $: stardata = data.data;
 </script>
 
-<h1>Stories from <br /> the Nightsky</h1>
+<h1>Stories from <br /> the night sky</h1>
 
 <p>What happened when the light started traveling towards you?</p>
 

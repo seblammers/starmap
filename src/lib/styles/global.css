@@ -1,3 +1,7 @@
+@import "reset.css";
+@import '@fontsource/roboto';
+@import '@fontsource-variable/andada-pro';
+
 :root {
     /* @link https://utopia.fyi/type/calculator?c=320,16,1.2,1350,20,1.414,8,1,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l */
     --step-custom: 3rem;
@@ -43,12 +47,30 @@
     --transition-bounce: 500ms cubic-bezier(0.5, 0.05, 0.2, 1.5);
     --tracking: -0.05ch;
     --tracking-s: -0.075ch;
+
+    --dark: #03041b;
+    --light: #fcfcfc;
     
     font-family: -apple-system, BlinkMacSystemFont, "avenir next", "avenir", "segoe ui", "helvetica neue", helvetica, "Cantarell", "Ubuntu", "roboto", "noto", "arial", sans-serif;
     font-size: 1rem;
     line-height: 1.6;
+    --accentFont: 'Andada Pro Variable', 'Iowan Old Style', 'Apple Garamond', 'Baskerville', 'Times New Roman',	'Droid Serif', 'Times', 'Source Serif Pro', serif;
+	  --primaryFont: 'Roboto', -apple-system, BlinkMacSystemFont, 'avenir next', 'avenir', 'segoe ui', 'helvetica neue', helvetica, 'Cantarell', 'Ubuntu', 'roboto', 'noto', 'arial', sans-serif;
 }
 
+body {
+  background-color: #03041bfb;
+  color: var(--light);
+  font-family: var(--accentFont);
+	font-feature-settings: 'liga';
+	font-size: var(--step-1);
+	line-height: var(--line-height);
+	letter-spacing: var(--tracking);
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	overflow: scroll;
+	overflow-x: hidden;
+}
 main {
     width: 100%;
     max-width: 60ch;
@@ -66,6 +88,7 @@ main > p, pre {
     grid-template-columns: 100%;
     grid-template-rows: auto 1fr auto;
     min-height: 100vh;
+    --flow-space: var(--space-l);
 }
   
 img {
@@ -83,8 +106,8 @@ img {
   }
   
   h1 {
-    font-size: var(--step-5);
-    margin: 0 0 3rem;
+    font-size: var(--step-6);
+    line-height: 1;
     position: relative;
     overflow: visible;
     padding-bottom: var(--space-s);
@@ -109,23 +132,19 @@ img {
     max-width: var(--max-width);
   }
   
-  .chart-wrapper {
+  .chart-container {
     position: relative;
-    width: 100%;
-    height: 100%;
+    max-width: 90vw;
+    margin: 0 auto;
   }
+  
 
   svg {
-    background-color: #03041b;
+    background-color: var(--dark);
   }
 
-  circle {
-    transition: fill-opacity 0.2s ease-in-out;
-    cursor: pointer;
-  }
-
-  circle:hover {
-    fill: white;
+  .flow > * + * {
+    margin-top: var(--flow-space, 1em);
   }
   
   

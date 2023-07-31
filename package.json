@@ -21,6 +21,8 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@fontsource-variable/andada-pro": "^5.0.6",
+		"@fontsource/roboto": "^5.0.5",
 		"svelte-resize-observer-action": "^0.0.3"
 	}
 }

@@ -3,5 +3,7 @@
 </script>
 
 <div class="layout">
-  <slot />
+  <main class="flow">
+    <slot />
+  </main>
 </div>

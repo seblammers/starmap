@@ -34,44 +34,48 @@
 </script>
 
 <div
-  class="tooltip"
+  class="tooltip flow"
   transition:fly={{ y: 10 }}
   style="position: absolute; top: {yPosition}px; left: {xPosition}px"
   bind:clientWidth={tooltipWidth}
 >
-  <h1>Star ID: {data.id}</h1>
+  <strong>Star ID:</strong>
+  {data.id}<br />
   {#if data.meta}
     {#if data.meta.name != ""}
       <strong>Star Name:</strong>
-      <em>{data.meta.name}</em><br />
+      {data.meta.name}<br />
     {/if}
   {/if}
   <strong>Distance:</strong>
-  <em>{formatter(data.wiki.light_years)} light years</em><br />
+  {formatter(data.wiki.light_years)} light years<br />
 
   {#if data.wiki.year > 1900}
-    <strong>Date:</strong> <em>{data.wiki.closest_match}</em><br /><br />
+    <strong>Date:</strong> {data.wiki.closest_match}<br /><br />
   {:else}
-    <strong>Year:</strong> <em>{data.wiki.year}</em><br /><br />
+    <strong>Year:</strong> {data.wiki.year}<br /><br />
   {/if}
 
-  <strong>Event(s):</strong> <em><ul>{@html data.wiki.events}</ul></em>
+  <strong>Event(s):</strong>
+  <ul>{@html data.wiki.events}</ul>
 </div>
 
 <style>
   .tooltip {
-    padding: 8px;
+    --flow-space: var(--space-2xs);
+    padding: var(--space-xs);
+    font-size: var(--step-0);
     background: #fcfcfc;
     color: #0a0a0a;
     border-radius: 3px;
     pointer-events: none;
     transition: top 300ms ease, left 300ms ease;
     max-width: 30ch;
+    font-family: var(--primaryFont);
   }
 
   .tooltip > h1 {
-    font-size: 1.2rem;
-    font-weight: 600;
+    font-size: var(--step-0);
     margin-bottom: var(--space-xs) !important;
     width: 100%;
   }
