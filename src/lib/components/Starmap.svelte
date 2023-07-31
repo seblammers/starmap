@@ -1,10 +1,12 @@
 <script>
-  // h/t https://observablehq.com/@pcarleton/visualizing-the-night-sky-working-with-d3-celestial
   import { geoEquirectangular, geoPath } from "d3-geo";
   import { onMount } from "svelte";
   import { writable } from "svelte/store";
+  import { tweened } from "svelte/motion";
+  import { cubicOut } from "svelte/easing";
   import { select } from "d3-selection";
   import { zoom } from "d3-zoom";
+  import { resize } from "svelte-resize-observer-action";
   import Tooltip from "./Tooltip.svelte";
   import Voronoi from "./Voronoi.svelte";
   import Glow from "./Glow.svelte";
@@ -12,95 +14,85 @@
   // fetch star data
   export let data;
 
-  // set default width (but adapt to screensize)
+  // set default width (but adapt to screensize below)
   let width = 1200;
   $: height = width / 2;
 
-  import { resize } from "svelte-resize-observer-action";
-  function onResize(entry) {
-    console.log("Look!", entry.contentRect.width);
-
-    rootX = width / 2;
-    rootY = width / 4;
-    rootK = width / 6;
-
-    console.log({ rootK, rootX, rootY });
-
-    $xPos = rootX;
-    $yPos = rootY;
-    $kPos = rootK;
-  }
-
+  // initial values, to be overwritten onMount
   let initial = {
     k: 180,
     x: 600,
     y: 300,
   };
 
-  // keep track of hovered stars
-  let hoveredData;
-
-  // handle voronoi-hover
-  function sethoveredData(d) {
-    hoveredData = data.features[d.detail];
-  }
-
-  import { tweened } from "svelte/motion";
-  import { cubicOut } from "svelte/easing";
-
   // keep track of positions (x,y,z) for panning and zooming
   let xPos = writable(initial.x);
   let yPos = writable(initial.y);
 
   let kPos = tweened(initial.k, {
-    duration: 300,
+    duration: 30,
     easing: cubicOut,
   });
 
-  // TODO: use a resize action to set initial values
-  // see https://svelte.dev/repl/797cfeea31a74871a732e3aad2117b5f?version=4.1.1
-  $: projection = geoEquirectangular()
-    // .fitExtent(
-    //   [
-    //     [10, 10],
-    //     [width - padding, height - padding],
-    //   ],
-    //   data
-    // )
-    .translate([$xPos, $yPos])
-    .scale([$kPos]);
-  $: path = geoPath(projection);
+  // handle zooming & panning
+  // set up separate variables to keep track of zooming
+  let zoomX = writable(0);
+  let zoomY = writable(0);
+  let zoomK = writable(1);
+  // initial values get overwritten in onMount
+  let rootX = writable(initial.x);
+  let rootY = writable(initial.y);
+  let rootK = writable(initial.k);
+  // handle zooming/panning
 
-  // scale starsize according to magnitude
-  function starSize(d) {
-    // adapted from celestial-d3
-    var mag = d.properties.mag;
-    if (mag === null) return 0.1;
-    var r = 3 * 1 * Math.exp(-0.28 * (mag + 2));
-    return Math.max(r, 0.1);
+  // positions x,y,z are defined by the
+  // - root values (depending on screen-width)
+  // - zoom values (depending on user-zoom)
+  //
+  // this ensures that both types of events
+  // (resizing or zooming) are handled separately
+  // and persist throughout a user session.
+  $: $xPos = $rootX + $zoomX;
+  $: $yPos = $rootY + $zoomY;
+  $: $kPos = $rootK * $zoomK;
+
+  // handle resizing
+  function onResize(entry) {
+    const newWidth = entry.contentRect.width;
+
+    // set new root values
+    $rootX = newWidth / 2;
+    $rootY = newWidth / 4;
+    $rootK = newWidth / 6;
   }
 
-  // handle zooming & panning
+  // handle zooming
   const zooming = (event) => {
+    // flag dragging for pointer styles
     dragging = true;
 
-    $xPos = $xPos + event.transform.x;
-    $yPos = $yPos + event.transform.y;
-    $kPos = $kPos * event.transform.k;
+    if (event.sourceEvent.constructor.name == "WheelEvent") {
+      // only mess with k when zooming
+      $zoomK = event.transform.k;
+    } else {
+      // set new values for zoom-variables
+      $zoomX = event.transform.x;
+      $zoomY = event.transform.y;
+    }
   };
 
+  // helper to call zoom-method
+  let starmap;
   // keep track of dragging (user "grabs" map)
   let dragging = false;
 
-  let rootX = writable();
-  let rootY = writable();
-  let rootK = writable();
-  // handle zooming/panning
-  let starmap;
+  // when the site starts up,
+  // set variables to match width and start
+  // listening for zoom-events
   onMount(() => {
-    rootX = width / 2;
-    rootY = width / 4;
-    rootK = width / 6;
+    $rootX = width / 2;
+    $rootY = width / 4;
+    $rootK = width / 6;
     const element = select(starmap);
     element.call(
       zoom()
@@ -113,6 +105,22 @@
     );
   });
 
+  // set projection and keep it updated
+  // when one of the values change.
+  $: projection = geoEquirectangular()
+    // .fitExtent(
+    //   [
+    //     [10, 10],
+    //     [width - padding, height - padding],
+    //   ],
+    //   data
+    // )
+    .translate([$xPos, $yPos])
+    .scale([$kPos]);
+
+  // same for the path-generator.
+  $: path = geoPath(projection);
+
   // helper to zoom out to initial positions
   let handleReset = () => {
     // get current k as zoom duration (more zoom, more time),
@@ -120,15 +128,32 @@
     const zoomDuration = Math.min($kPos, 4000);
 
     // if zoomed in more, take longer to zoom out
-    kPos.set(initial.k, { duration: zoomDuration });
-    xPos.set(initial.x);
-    yPos.set(initial.y);
+    kPos.set($rootK, { duration: zoomDuration });
+    xPos.set($rootX);
+    yPos.set($rootY);
   };
 
   $: console.log("width is now", width);
 
   // helper to slightly scale stars on zoom
   $: magFactor = Math.sqrt($kPos / initial.k);
+
+  // keep track of hovered stars
+  let hoveredData;
+
+  // handle voronoi-hover
+  function sethoveredData(d) {
+    hoveredData = data.features[d.detail];
+  }
+
+  // scale starsize according to magnitude
+  function starSize(d) {
+    // adapted from celestial-d3
+    var mag = d.properties.mag;
+    if (mag === null) return 0.1;
+    var r = 3 * 1 * Math.exp(-0.28 * (mag + 2));
+    return Math.max(r, 0.1);
+  }
 </script>
 
 <div class="chart-container" bind:clientWidth={width} use:resize={onResize}>
@@ -177,7 +202,7 @@
   }
   .chart-container {
     position: relative;
-    max-width: 2400px;
+    max-width: 90vw;
     margin: 0 auto;
   }
   .dragging {

@@ -8,38 +8,37 @@
 
   let dispatcher = createEventDispatcher();
 
-  function log(cell) {
+  function dispatch(cell) {
     let star_id = voronoi.find(
       cell.properties.site[0],
       cell.properties.site[1]
     );
-    //console.log(data.features[star_id].id);
     dispatcher("voronoi-mouseover", star_id);
   }
+
+  // create voronoi based on star data
   $: voronoi = geoVoronoi(
     data.features.map((d) => {
       return [d.geometry.coordinates[0][0], d.geometry.coordinates[1][0]];
     })
   );
 
+  // create polygons based on voronoi
   $: poly = voronoi.polygons();
-
-  let isHovered = false;
 </script>
 
 <g class="voronoi">
   {#each poly.features as cell}
     <path
       d={path(cell.geometry)}
-      opacity="0.5"
+      opacity="0"
       fill={colour}
-      stroke={isHovered == cell ? "#ccc" : colour}
+      stroke={colour}
       on:mouseover={() => {
-        log(cell);
-        isHovered = cell;
+        dispatch(cell);
       }}
       on:focus={() => {
-        log(cell);
+        dispatch(cell);
       }}
     />
   {/each}
