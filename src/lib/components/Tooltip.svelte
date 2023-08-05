@@ -19,28 +19,25 @@
     x + tooltipWidth > width ? x - tooltipWidth - xNudge : x + xNudge;
   $: yPosition = y + yNudge;
 
-  let id2name = (id) => {
-    // get "proper name" where available
-    // else return "HIP ID"
-    if (id.length === 0) return undefined;
+  let mobile;
 
-    const match = names[id];
-
-    if (match && match.name !== "") {
-      return match.name;
-    }
-    return `HIP ${id}`;
-  };
+  $: if (width < 900) {
+    mobile = true;
+  } else {
+    mobile = false;
+  }
 </script>
 
 <div
   class="tooltip flow"
+  class:mobile
   transition:fly={{ y: 10 }}
   style="position: absolute; top: {yPosition}px; left: {xPosition}px"
   bind:clientWidth={tooltipWidth}
 >
   <strong>Star ID:</strong>
-  {data.id}<br />
+  {data.id}
+  <br />
   {#if data.meta}
     {#if data.meta.name != ""}
       <strong>Star Name:</strong>
@@ -61,24 +58,27 @@
 </div>
 
 <style>
+  .mobile {
+    position: relative !important;
+    top: 0px !important;
+    left: 0px !important;
+    max-width: inherit !important;
+  }
+
   .tooltip {
     --flow-space: var(--space-2xs);
     padding: var(--space-xs);
     font-size: var(--step-0);
     background: #fcfcfc;
     color: #0a0a0a;
-    border-radius: 3px;
+    border-radius: var(--radius);
+    border: 2px solid var(--dark);
     pointer-events: none;
     transition: top 300ms ease, left 300ms ease;
     max-width: 30ch;
     font-family: var(--primaryFont);
   }
 
-  .tooltip > h1 {
-    font-size: var(--step-0);
-    margin-bottom: var(--space-xs) !important;
-    width: 100%;
-  }
   ul {
     padding: var(--space-xs) var(--space-s);
     margin-top: var(--space-3xs);
