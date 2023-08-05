@@ -1,5 +1,6 @@
 <script>
   import "$lib/styles/global.css";
+  import Footer from "$lib/components/Footer.svelte";
 </script>
 
 <div class="layout">
@@ -7,3 +8,5 @@
     <slot />
   </main>
 </div>
+
+<Footer />
