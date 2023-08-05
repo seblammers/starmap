@@ -1,20 +1,18 @@
 <script>
+  import Heading from "$lib/components/Heading.svelte";
+  import Intro from "$lib/components/Intro.svelte";
   import Starmap from "$lib/components/Starmap.svelte";
+  import Methods from "$lib/components/Methods.svelte";
 
   export let data;
 
   $: stardata = data.data;
 </script>
 
-<h1>Stories from <br /> the night sky</h1>
+<Heading />
 
-<p>What happened when the light started traveling towards you?</p>
+<Intro />
 
 <Starmap data={stardata} />
 
-<p>Turns out, a lot.</p>
-
-<br /> <br /> <br />
-
-<h3>Methodology</h3>
-<p>Scraping data from wiki.</p>
+<Methods />
