@@ -30,7 +30,7 @@
   let yPos = writable(initial.y);
 
   let kPos = tweened(initial.k, {
-    duration: 30,
+    duration: 100,
     easing: cubicOut,
   });
 
@@ -160,10 +160,6 @@
 </script>
 
 <div class="chart-container" bind:clientWidth={width} use:resize={onResize}>
-  <button on:click={handleReset}> Reset </button>
-
-  <button on:click={() => ($kPos += 100)}> + </button>
-  <button on:click={() => ($kPos -= 100)}> - </button>
   <svg
     {width}
     {height}
@@ -192,12 +188,34 @@
     {/if}
   </svg>
 
+  <div class="controls">
+    <button id="zoom-reset" on:click={handleReset}>Reset</button>
+
+    <div class="zoom-control">
+      <button id="zoom-in" on:click={() => ($kPos += 100)}> &#43; </button>
+      <button id="zoom-out" on:click={() => ($kPos -= 100)}> &#8722; </button>
+    </div>
+  </div>
+
   {#if hoveredData}
     <Tooltip data={hoveredData} {width} {projection} />
   {/if}
 </div>
 
 <style>
+  .controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+
+  #zoom-reset {
+    margin-right: var(--space-l);
+  }
+  .zoom-control {
+    display: flex;
+    flex-direction: row;
+  }
   svg {
     background-color: var(--dark);
     stroke: none;
