@@ -66,6 +66,7 @@
   Let's make that more clear: Here is how long the light needs to travel from
   the sun to earth if one light year would take one second:
 </p>
+
 <DotPlot data={dataSun} />
 
 <p>
@@ -105,12 +106,3 @@
   there, so if you want to go back to the initial overview just hit the "Reset"
   button.
 </p>
-
-<style>
-  .spacer {
-    height: 10vh;
-  }
-
-  em {
-  }
-</style>
