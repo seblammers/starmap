@@ -74,6 +74,8 @@
   years away:
 </p>
 
+<DotPlot data={dataSirius} />
+
 <p>
   I think it is amazing to think about: the light from the stars traveled for
   years and years until it reaches us.
