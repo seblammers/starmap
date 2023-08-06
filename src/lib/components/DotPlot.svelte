@@ -37,6 +37,7 @@
     .domain([0, 1.711 * 695508])
     .range([2, 10]);
 
+  // extract distance from data to pipe into tween-duration.
   let duration = d3.max(data, (d) => d.distance) * 1000;
   let tweenedNumber = tweened(0, {
     delay: 0,
@@ -51,14 +52,20 @@
       tweenedNumber.set(duration);
     }
     if (show === "hide") {
+      // make sure the reset is fast
       tweenedNumber.set(0, { duration: 0 });
     }
   }
 
-  // make sure to show always one decimal
+  // make sure to show always one decimal for Sirius
   const s = d3.formatSpecifier("f");
   s.precision = d3.precisionFixed(0.1);
   const formatter = d3.format(s);
+
+  // but display more for the Sun
+  const formatterSun = d3.format(".2");
+
+  let isSun = data.some((el) => el.name === "Sun");
 </script>
 
 <div class="container">
@@ -77,6 +84,7 @@
       <Glow />
       <g class="state" transform="translate(10, {yScale(data[0])})">
         {#each data as body}
+          <!-- add circles and show glow effect for stars, when toggled  -->
           <circle
             cx={xScale(body.distance)}
             r={radiusScale(body.size)}
@@ -95,6 +103,12 @@
         {/each}
 
         {#if show == "show"}
+          <line
+            in:draw={{ duration: duration, easing: linear }}
+            x1={xScale(d3.max(data, (d) => d.distance)) + nudge}
+            x2={xScale(d3.min(data, (d) => d.distance)) - nudge}
+            stroke="currentColor"
+          />
           <text
             x={width / 2}
             y={-30}
@@ -102,17 +116,13 @@
             dominant-baseline="middle"
             fill="currentColor"
           >
-            {formatter($tweenedNumber / 1000)} light years
+            <!-- Toggle formatter if Sun is present, so that the tiny 
+                number for the sun is displayed, yet also handle the tweened number
+                of Sirius gracefully with the respective formatting. -->
+            {isSun
+              ? formatterSun($tweenedNumber / 1000)
+              : formatter($tweenedNumber / 1000)} light years
           </text>
-          <line
-            in:draw={{ duration: duration, easing: linear }}
-            x2={xScale(d3.min(data, (d) => d.distance)) - nudge}
-            x1={xScale(d3.max(data, (d) => d.distance)) + nudge}
-            y1="0"
-            y2="0"
-            stroke="#aaa"
-            filter="url(#glow)"
-          />
         {/if}
       </g></svg
     >
@@ -120,9 +130,6 @@
 </div>
 
 <style>
-  line {
-    stroke-width: 2;
-  }
   .container {
     font-family: var(--primaryFont);
     background-color: inherit;
