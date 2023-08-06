@@ -74,7 +74,7 @@
     if (event.sourceEvent.constructor.name == "WheelEvent") {
       // only mess with k when zooming
 
-      console.log(event.sourceEvent);
+      //console.log(event.sourceEvent);
 
       $zoomK = event.transform.k;
     } else {
@@ -135,8 +135,6 @@
     xPos.set($rootX);
     yPos.set($rootY);
   };
-
-  $: console.log("width is now", width);
 
   // helper to slightly scale stars on zoom
   $: magFactor = Math.sqrt($kPos / initial.k);
