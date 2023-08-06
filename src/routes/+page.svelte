@@ -1,4 +1,5 @@
 <script>
+  import Meta from "$lib/components/Meta.svelte";
   import Heading from "$lib/components/Heading.svelte";
   import Intro from "$lib/components/Intro.svelte";
   import Starmap from "$lib/components/Starmap.svelte";
@@ -8,6 +9,8 @@
 
   $: stardata = data.data;
 </script>
+
+<Meta />
 
 <Heading />
 
