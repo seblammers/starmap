@@ -172,15 +172,6 @@ img {
     box-shadow: 0px 0px 20px var(--accent);
     cursor: pointer;
     }
-  
-  input {
-    display: block;
-    font-size: inherit;
-    padding: var(--space-2xs);
-    width: 100%;
-    accent-color: var(--accent);
-    background-color: inherit;
-  }
 
   a {
     color: currentColor;
