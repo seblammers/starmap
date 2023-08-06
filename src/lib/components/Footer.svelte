@@ -1,11 +1,4 @@
-<script>
-  let width;
-  $: mobile = width < 900;
-</script>
-
-<svelte:window bind:innerWidth={width} />
-
-<footer class:mobile>
+<footer>
   <p>
     &copy; {new Date().getFullYear()} Design & Development
   </p>
@@ -36,7 +29,8 @@
   }
   footer {
     font-weight: 300;
-    background: var(--accent);
+    background: var(--light);
+    color: var(--dark);
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -48,7 +42,7 @@
 
   a:hover,
   .scroll-to-top:hover {
-    color: var(--dark);
+    color: var(--accent);
   }
 
   footer > * {
@@ -58,20 +52,5 @@
   .scroll-to-top {
     cursor: pointer;
     margin: var(--space-m);
-  }
-  .mobile {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-  }
-  .mobile > * {
-    margin: var(--space-xs);
-  }
-  .mobile > .scroll-to-top {
-    margin: var(--space-m);
-  }
-  .mobile > .no-top {
-    margin-top: 0;
   }
 </style>
