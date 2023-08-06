@@ -67,6 +67,8 @@
   the sun to earth if one light year would take one second:
 </p>
 
+<DotPlot data={dataSun} />
+
 <p>
   Compare that to one of the brightest Stars <em>Sirius</em>, which 8.6 light
   years away:
