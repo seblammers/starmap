@@ -41,6 +41,7 @@
     /* Custom pairs */
     --space-s-l: clamp(1.00rem, calc(0.15rem + 4.27vw), 3.75rem);
   
+    --max-width: 60ch;
     --gutter: var(--space-s-m);
     --transition-base: 250ms ease;
     --transition-movement: 200ms linear;
@@ -49,9 +50,10 @@
     --tracking: -0.05ch;
     --tracking-s: -0.075ch;
 
-    --dark: #03041b;
-    --accent: #56599c;
-    --light: #fcfcfc;
+    --dark: hsl(238, 80%, 6%);
+    --accent: hsl(238, 80%, 66%);
+    --light: hsl(238, 80%, 96%);
+    --light-bright: hsl(238, 95%, 96%);
     --radius: 0.5rem;
     --border-radius: var(--step-1);
     
@@ -63,7 +65,7 @@
 }
 
 body {
-  background-color: #03041bfb;
+  background-color: var(--dark);
   color: var(--light);
   font-family: var(--accentFont);
 	font-feature-settings: 'liga';
@@ -78,10 +80,9 @@ body {
 }
 main {
     width: 100%;
-    max-width: 60ch;
+    max-width: var(--max-width);
     margin: var(--space-3xl) auto;
     padding: 0 1rem;
-    min-height: 65vh; 
 }
 
 main > p, pre {
@@ -105,9 +106,8 @@ img {
 :where(h1, h2, h3, h4, h5, h6) {
     margin-top: var(--space-xl);
     line-height: 110%;
-    font-family: var(--headingFont);
     font-weight: 700;
-    color: var(--text1-light);
+    color: var(--light-bright);
   }
   
   h1 {
@@ -193,4 +193,8 @@ img {
   a:hover {
     cursor: pointer;
     color: var(--accent);
+  }
+
+  .spacer {
+    height: 10vh;
   }
