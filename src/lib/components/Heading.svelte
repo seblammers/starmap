@@ -39,6 +39,14 @@
     -webkit-box-direction: normal;
     -webkit-box-align: center;
     -webkit-box-pack: justify;
+    transition-property: text-shadow;
+    transition-duration: 0.5s;
+  }
+
+  .heading:hover {
+    text-shadow: 0 0 20px var(--light), 0 0 30px var(--dark),
+      0 0 40px var(--dark), 0 0 50px var(--dark), 0 0 60px var(--dark),
+      0 0 70px var(--dark), 0 0 80px var(--dark);
   }
 
   .byline {
