@@ -53,9 +53,11 @@
 
   footer > * {
     flex: 0 1 auto;
+    margin: var(--space-s);
   }
   .scroll-to-top {
     cursor: pointer;
+    margin: var(--space-m);
   }
   .mobile {
     display: flex;
@@ -65,6 +67,9 @@
   }
   .mobile > * {
     margin: var(--space-xs);
+  }
+  .mobile > .scroll-to-top {
+    margin: var(--space-m);
   }
   .mobile > .no-top {
     margin-top: 0;
