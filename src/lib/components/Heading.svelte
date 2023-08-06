@@ -15,7 +15,7 @@
 
 <style>
   .landing {
-    min-height: 70vh;
+    min-height: 65vh;
 
     display: flex;
     flex-direction: column;
@@ -76,7 +76,7 @@
 
   @keyframes bounce {
     50% {
-      transform: translateY(-20%);
+      transform: translateY(-10%);
     }
   }
 </style>
