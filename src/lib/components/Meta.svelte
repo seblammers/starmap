@@ -7,7 +7,7 @@
   // Optional props
   export let website = "https://storiesfromthenightsky.netlify.app/"; // Website URL
   export let authorName = "Sebastian Lammers"; // Author name
-  export let image = "/og-image.png"; // Open Graph image URL
+  export let image = "https://storiesfromthenightsky.netlify.app/og-image.png"; // Open Graph image URL
   export let paymentPointer = ""; // Web Monetization payment pointer
   export let datePublished = ""; // ISO 8601 format
   export let dateModified = ""; // ISO 8601 format
