@@ -1,6 +1,6 @@
 <div class="landing">
   <div class="heading flow">
-    <h1>Stories from <br /> the night sky</h1>
+    <h1>[*] <br />Stories from <br /> the night sky</h1>
 
     <p>A data-driven visual experiment.</p>
 
@@ -34,6 +34,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    text-align: center;
 
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
