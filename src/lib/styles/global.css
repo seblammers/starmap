@@ -68,7 +68,7 @@ body {
   background-color: var(--dark);
   color: var(--light);
   font-family: var(--accentFont);
-	font-feature-settings: 'liga';
+	font-feature-settings: 'liga', 'calt';
   font-variant: common-ligatures;
 	font-size: var(--step-1);
 	line-height: var(--line-height);
