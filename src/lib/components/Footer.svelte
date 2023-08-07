@@ -21,6 +21,7 @@
   >
     Scroll to top &uarr;
   </p>
+<p>[*]</p>
 </footer>
 
 <style>
