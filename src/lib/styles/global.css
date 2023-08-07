@@ -78,6 +78,11 @@ body {
 	overflow: scroll;
 	overflow-x: hidden;
 }
+
+::selection {
+	background: var(--accent);
+}
+
 main {
     width: 100%;
     max-width: var(--max-width);
@@ -87,6 +92,21 @@ main {
 
 main > p, pre {
     max-width: var(--max-width);
+}
+
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
+	font-family: inherit;
+	max-width: 100%;
+	scrollbar-color: var(--accent);
+}
+
+html,
+body {
+	scrollbar-color: var(--accent) transparent;
+	scrollbar-width: thin;
 }
   
 .layout {
