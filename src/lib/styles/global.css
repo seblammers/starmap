@@ -53,7 +53,7 @@
     --dark: hsl(238, 80%, 6%);
     --accent: hsl(238, 80%, 66%);
     --light: hsl(238, 80%, 96%);
-    --light-bright: hsl(238, 95%, 96%);
+    --light-bright: hsl(238, 98%, 98%);
     --radius: 0.5rem;
     --border-radius: var(--step-1);
     
@@ -116,12 +116,6 @@ body {
     min-height: 100vh;
     --flow-space: var(--space-l);
 }
-  
-img {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-}
 
 :where(h1, h2, h3, h4, h5, h6) {
     margin-top: var(--space-l);
@@ -165,7 +159,7 @@ img {
   }
   
   .flow > * + * {
-    margin-top: var(--flow-space, 1em);
+    margin-top: var(--flow-space, --space-s);
   }
   
   button,
