@@ -55,10 +55,11 @@
 
 <p>
   You might think the Sun is quite far away, right? True, it's 149,600,000 km
-  away. For perspective: if you travel from Paris to New York and then proceed
-  to fly across the US all the way to Hong Kong and then onwards back to Paris,
-  you traveled merely 28,081 km. Which means it would take more than 5,000 of
-  those trips to go to the Sun. Turns out planes are not so fast after all.
+  away. For perspective: if you travel around the world, starting from Paris, to
+  New York and then proceed to fly across the US all the way to Hong Kong and
+  then onwards back to Paris, you traveled merely 28,081 km. Which means it
+  would take more than 5,000 of those trips to go to the Sun. Turns out planes
+  are not so fast after all.
 </p>
 <p>
   But you know what is super fast? Light. Yes. It takes the light just 8 min 19
@@ -67,8 +68,9 @@
 </p>
 
 <p>
-  What do you think how many kms can light travel in one year? How much is a
-  light year? 9.46 trillion kilometers. Yes, that's right: 9,460,000,000,000 km.
+  What do you think, how many kms can light travel in one year? How much is "a
+  light year"? 9.46 trillion kilometers. Yes, that's right: 9,460,000,000,000
+  km.
 </p>
 
 <p>I know, these numbers are hard to grasp.</p>
@@ -98,16 +100,9 @@
   star light started traveling towards us.
 </p>
 
-<p>
-  In case of <em>Sirius</em>, that's just 8.6 years ago, so roughly the
-  beginning of the year 2015.
-</p>
-
-<p>
-  That's the time of the <em>Charlie Hebdo</em> shooting. It's also the time of
-  the premiere of <em>John Wick</em> in cinemas in Germany, as one email of a friend
-  reminds me. (I live in Germany.)
-</p>
+<h2>
+  <em>That</em> is what this project is about
+</h2>
 
 <p>
   Below, you'll find a map of the night sky that you can interact with. You can
@@ -118,3 +113,5 @@
   button. All events were taken from Wikipedia timelines and roughly matched to
   the respective amount of light years.
 </p>
+
+<p>Which star tells the most interesting story to you?</p>
