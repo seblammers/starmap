@@ -69,8 +69,8 @@
     --flow-space: var(--space-2xs);
     padding: var(--space-xs);
     font-size: var(--step-0);
-    background: #fcfcfc;
-    color: #0a0a0a;
+    background: var(--light-bright);
+    color: var(--dark);
     border-radius: var(--radius);
     border: 2px solid var(--dark);
     pointer-events: none;
