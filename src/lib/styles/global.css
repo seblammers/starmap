@@ -87,6 +87,7 @@ main {
     width: 100%;
     max-width: var(--max-width);
     margin: var(--space-3xl) auto;
+    margin-top: var(--space-xl);
     padding: 0 1rem;
 }
 
