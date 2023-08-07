@@ -21,7 +21,7 @@
   >
     Scroll to top &uarr;
   </p>
-<p>[*]</p>
+  <p>[*]</p>
 </footer>
 
 <style>
@@ -30,7 +30,7 @@
   }
   footer {
     font-weight: 300;
-font-size: var(--step-0);
+    font-size: var(--step-0);
     background: var(--light);
     color: var(--dark);
     display: flex;
