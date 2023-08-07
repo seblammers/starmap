@@ -36,26 +36,29 @@
   a myriad of stories.
 </p>
 
-<p>This project is not about all that.</p>
+<p>
+  This project is not about all that. It's not a story <em>about</em> the stars.
+  Rather, it's trying to convey some of the stories <em>from</em> the stars.
+</p>
 
 <p>
-  It's about a tiny aspect that is often overlooked. The stars our ancestors
-  were looking at, we are looking at, and future generations will be looking at,
-  they seem to be so reliable. They just keep on sending their light towards us,
-  so we can marvel at them.
+  The stars our ancestors were looking at, we are looking at, and future
+  generations will be looking at, they seem to be so reliable. They just keep on
+  sending their light towards us, so we can marvel at them.
 </p>
 
 <p>
   But the crazy distances that the light needs to travel in order to reach your
-  eyes...? That is <em>astonishing</em>.
+  eyes...? That is <em>astonishing</em>. To grapple these numbers, let's start
+  with the star that is closest to us: the Sun.
 </p>
 
 <p>
-  You might think the Sun is quite far away, right? Well, it's 149,600,000 km.
-  For perspective: if you travel from Paris to New York and then proceed to fly
-  across the US all the way to Hong Kong and then onwards back to Paris, you
-  traveled merely 28,081 km. Which means it would take more than 5,000 of those
-  trips to go to the Sun. Turns out planes are not so fast after all.
+  You might think the Sun is quite far away, right? True, it's 149,600,000 km
+  away. For perspective: if you travel from Paris to New York and then proceed
+  to fly across the US all the way to Hong Kong and then onwards back to Paris,
+  you traveled merely 28,081 km. Which means it would take more than 5,000 of
+  those trips to go to the Sun. Turns out planes are not so fast after all.
 </p>
 <p>
   But you know what is super fast? Light. Yes. It takes the light just 8 min 19
