@@ -134,7 +134,7 @@ body {
   }
   
   h2 {
-    font-size: var(--step-4);
+    font-size: var(--step-3);
     }
   
   h3 {
@@ -145,6 +145,9 @@ body {
     font-size: var(--step-2);
   }
   
+  :is(h2, h3, h4) + * {
+    --flow-space: var(--space-2xs);
+  }
   /* Set line lengths */
   p,
   li,
