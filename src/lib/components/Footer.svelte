@@ -29,6 +29,7 @@
   }
   footer {
     font-weight: 300;
+font-size: var(--step-0);
     background: var(--light);
     color: var(--dark);
     display: flex;
