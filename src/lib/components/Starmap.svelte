@@ -30,7 +30,7 @@
   let yPos = writable(initial.y);
 
   let kPos = tweened(initial.k, {
-    duration: 100,
+    duration: 50,
     easing: cubicOut,
   });
 
