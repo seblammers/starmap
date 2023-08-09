@@ -78,7 +78,7 @@
 
       $zoomK = event.transform.k;
     } else {
-      // set new values for zoom-variables
+      // set new values for panning-variables
       $zoomX = event.transform.x;
       $zoomY = event.transform.y;
     }
@@ -99,10 +99,11 @@
     const element = select(starmap);
     element.call(
       zoom()
+        .scaleExtent([0.8, 8.0])
         .on("zoom", zooming)
         //.scaleExtent([ 150, 1000 ])
         //.translateExtent([[ -1200, -700 ], [ 1200, 700 ]])
-        .on("end", (event) => {
+        .on("end", () => {
           dragging = false;
         })
     );
@@ -121,6 +122,7 @@
     .translate([$xPos, $yPos])
     .scale([$kPos]);
 
+  $: console.log({ $rootK, $zoomK, $kPos });
   // same for the path-generator.
   $: path = geoPath(projection);
 
@@ -131,7 +133,7 @@
     const zoomDuration = Math.min($kPos, 4000);
 
     // if zoomed in more, take longer to zoom out
-    kPos.set($rootK, { duration: zoomDuration });
+    zoomK.set(1, { duration: zoomDuration });
     xPos.set($rootX);
     yPos.set($rootY);
   };
@@ -190,8 +192,8 @@
     <button id="zoom-reset" on:click={handleReset}>Reset</button>
 
     <div class="zoom-control">
-      <button id="zoom-in" on:click={() => ($kPos += 100)}> &#43; </button>
-      <button id="zoom-out" on:click={() => ($kPos -= 100)}> &#8722; </button>
+      <button id="zoom-in" on:click={() => ($zoomK += 0.3)}> &#43; </button>
+      <button id="zoom-out" on:click={() => ($zoomK -= 0.3)}> &#8722; </button>
     </div>
   </div>
 
