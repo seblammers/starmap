@@ -36,9 +36,13 @@
   a myriad of stories.
 </p>
 
+<h2>
+  This project is not about all <em>that</em>
+</h2>
+
 <p>
-  This project is not about all that. It's not a story <em>about</em> the stars.
-  Rather, it's trying to convey some of the stories <em>from</em> the stars.
+  It's not a story <em>about</em> the stars. Rather, it's trying to convey some
+  of the stories <em>from</em> the stars. What could those be, you ask...?
 </p>
 
 <p>
@@ -48,7 +52,7 @@
 </p>
 
 <p>
-  But the crazy distances that the light needs to travel in order to reach your
+  But the crazy distances that the light needs to travel in order to reach our
   eyes...? That is <em>astonishing</em>. To grapple these numbers, let's start
   with the star that is closest to us: the Sun.
 </p>
@@ -63,7 +67,7 @@
 </p>
 <p>
   But you know what is super fast? Light. Yes. It takes the light just 8 min 19
-  s to go from the Sun to your eyes! So it makes sense that we measure the vast
+  s to go from the Sun to our eyes! So it makes sense that we measure the vast
   distances of stars and other celestial bodies in light years.
 </p>
 
@@ -77,7 +81,8 @@
 
 <p>
   Let's make that more clear: Here is how long the light needs to travel from
-  the Sun to you <em>if one light year would take one second</em>:
+  the Sun to you <em>if one light year would take one second</em> (surprise, it's
+  super fast):
 </p>
 
 <DotPlot data={dataSun} />
@@ -91,13 +96,18 @@
 
 <p>
   I think it is amazing to think about: the light from the stars traveled for
-  years and years until it reaches us.
+  years and years until it reaches us. That means, for many stars the light you
+  see now started traveling towards you when you were not even born!
 </p>
 
 <p>
+  So this project is about a simple idea: What if each star could tell you what
+  was happening on Earth when its light started racing towards your eye balls.
+</p>
+<p>
   But what fascinates me even more is to think about the time on earth that
-  connects us, seeing the stars with the people on Earth that existed when the
-  star light started traveling towards us.
+  connects us, seeing the stars, with the people on Earth that existed when the
+  star light started racing towards us.
 </p>
 
 <h2>
