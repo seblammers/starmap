@@ -26,6 +26,17 @@
   ];
 
   import DotPlot from "./DotPlot.svelte";
+  import UnitSpan from "./UnitSpan.svelte";
+  const distanceLightYear = 9460000000000;
+  const distanceSun = 149600000;
+  const distanceWorld = 28081;
+
+  // keep track of which unit is used
+  let isKm = true;
+
+  function handleClick() {
+    isKm = !isKm;
+  }
 </script>
 
 <div class="spacer" />
@@ -58,12 +69,21 @@
 </p>
 
 <p>
-  You might think the Sun is quite far away, right? True, it's 149,600,000 km
+  You might think the Sun is quite far away, right? True, it's <UnitSpan
+    value={distanceSun}
+    {handleClick}
+    {isKm}
+    formatString=",.3r"
+  />
   away. For perspective: if you travel around the world, starting from Paris, to
-  New York and then proceed to fly across the US all the way to Hong Kong and
-  then onwards back to Paris, you traveled merely 28,081 km. Which means it
-  would take more than 5,000 of those trips to go to the Sun. Turns out planes
-  are not so fast after all.
+  New York and then proceed to fly across the US all the way to Hong Kong and then
+  onwards back to Paris, you traveled merely <UnitSpan
+    value={distanceWorld}
+    {handleClick}
+    {isKm}
+    formatString=",.3r"
+  />. Which means it would take more than 5,000 of those trips to go to the Sun.
+  Turns out planes are not so fast after all.
 </p>
 <p>
   But you know what is super fast? Light. Yes. It takes the light just 8 min 19
@@ -73,8 +93,17 @@
 
 <p>
   What do you think, how many kms can light travel in one year? How much is "a
-  light year"? 9.46 trillion kilometers. Yes, that's right: 9,460,000,000,000
-  km.
+  light year"? <UnitSpan
+    value={distanceLightYear}
+    {handleClick}
+    {isKm}
+    formatString=".3s"
+  />. Yes, that's right, the "T" stands for trillions: <UnitSpan
+    value={distanceLightYear}
+    {handleClick}
+    {isKm}
+    formatString=",.3r"
+  />.
 </p>
 
 <p>I know, these numbers are hard to grasp.</p>
