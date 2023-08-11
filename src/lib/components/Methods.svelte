@@ -1,5 +1,5 @@
 <div class="spacer" />
-<h2>Methods</h2>
+<h2 id="methods">Methods</h2>
 
 <p>Data were collected and merged from 3 sources:</p>
 
