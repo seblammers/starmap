@@ -53,7 +53,7 @@
 
 <style>
   .clickable {
-    text-decoration: underline;
+    text-decoration: underline dotted var(--accent) 1px;
   }
   .clickable:hover {
     cursor: pointer;
