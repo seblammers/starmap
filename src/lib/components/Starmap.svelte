@@ -13,6 +13,7 @@
 
   // fetch star data
   export let data;
+  let highlight = "var(--accent)";
 
   // set default width (but adapt to screensize below)
   let width = 1200;
@@ -176,6 +177,7 @@
       <g id="stars">
         {#each data.features as s}
           {@const size = starSize(s) * magFactor}
+
           <circle
             cx={projection(s.geometry.coordinates)[0]}
             cy={projection(s.geometry.coordinates)[1]}
@@ -183,6 +185,16 @@
             filter={hoveredData == s ? "url(#glow)" : ""}
             fill="white"
           />
+          <!--extra ring if hovered-->
+          {#if hoveredData == s}
+            <circle
+              cx={projection(s.geometry.coordinates)[0]}
+              cy={projection(s.geometry.coordinates)[1]}
+              r={size * 5}
+              stroke={highlight}
+              fill="transparent"
+            />
+          {/if}
         {/each}
       </g>
     {/if}
