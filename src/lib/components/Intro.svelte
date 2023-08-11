@@ -133,11 +133,6 @@
   So this project is about a simple idea: What if each star could tell you what
   was happening on Earth when its light started racing towards your eye balls.
 </p>
-<p>
-  But what fascinates me even more is to think about the time on earth that
-  connects us, seeing the stars, with the people on Earth that existed when the
-  star light started racing towards us.
-</p>
 
 <h2>
   <em>That</em> is what this project is about
@@ -149,8 +144,10 @@
   the time when the light started traveling towards you. Try to zoom in to be
   able to better select which star you learn about. It's easy to get lost in
   there, so if you want to go back to the initial overview just hit the "Reset"
-  button. All events were taken from Wikipedia timelines and roughly matched to
-  the respective amount of light years.
+  button. All events were taken from Wikipedia timelines and matched<sup
+    ><a id="n1" href="#notes">1</a></sup
+  >
+  to the respective amount of light years.
 </p>
 
 <p>Which star tells the most interesting story to you?</p>
