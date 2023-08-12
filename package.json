@@ -17,6 +17,7 @@
 		"d3-geo-voronoi": "^2.0.1",
 		"element-resize-detector": "^1.2.4",
 		"svelte": "^3.54.0",
+		"svelte-canvas": "^0.9.3",
 		"vite": "^4.0.0"
 	},
 	"type": "module",

@@ -5,6 +5,7 @@
   import Starmap from "$lib/components/Starmap.svelte";
   import Methods from "$lib/components/Methods.svelte";
   import Notes from "$lib/components/Notes.svelte";
+  import StarmapCanvas from "$lib/components/StarmapCanvas.svelte";
 
   export let data;
 
@@ -17,7 +18,9 @@
 
 <Intro />
 
-<Starmap data={stardata} />
+<!-- <Starmap data={stardata} /> -->
+
+<StarmapCanvas data={stardata} />
 
 <Methods />
 

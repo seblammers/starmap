@@ -10,6 +10,7 @@
   // star-data via projection
   $: [x, y] = projection(data.geometry.coordinates);
 
+  $: console.log("tooltip", { x, y });
   let tooltipWidth;
 
   const xNudge = 15;
