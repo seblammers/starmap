@@ -3,7 +3,7 @@
   import { onMount } from "svelte";
   import { writable } from "svelte/store";
   import { tweened } from "svelte/motion";
-  import { sineIn } from "svelte/easing";
+  import { linear } from "svelte/easing";
   import { Canvas } from "svelte-canvas";
   import { select } from "d3-selection";
   import { zoom } from "d3-zoom";
@@ -13,6 +13,7 @@
   import Tooltip from "./Tooltip.svelte";
   import VoronoiCanvas from "./VoronoiCanvas.svelte";
   import Glow from "./Glow.svelte";
+  import PanButton from "./PanButton.svelte";
 
   // new try for voronoi
   $: voronoi = geoVoronoi(
@@ -46,12 +47,18 @@
   };
 
   // keep track of positions (x,y,z) for panning and zooming
-  let xPos = writable(initial.x);
-  let yPos = writable(initial.y);
+  let xPos = tweened(initial.x, {
+    duration: 500,
+    easing: linear,
+  });
+  let yPos = tweened(initial.y, {
+    duration: 500,
+    easing: linear,
+  });
 
   let kPos = tweened(initial.k, {
     duration: 500,
-    easing: sineIn,
+    easing: linear,
   });
 
   // handle zooming & panning
@@ -85,7 +92,6 @@
     $rootY = newWidth / 4;
     $rootK = newWidth / 6;
   }
-
   // handle zooming
   const zooming = (event) => {
     // flag dragging for pointer styles
@@ -93,8 +99,6 @@
 
     if (event.sourceEvent.constructor.name == "WheelEvent") {
       // only mess with k when zooming
-
-      //console.log(event.sourceEvent);
 
       $zoomK = event.transform.k;
     } else {
@@ -120,9 +124,14 @@
     element.call(
       zoom()
         .scaleExtent([0.8, 8.0])
+        .translateExtent([
+          [-(width / 2), -(height / 2)],
+          [width, height],
+        ])
         .on("zoom", zooming)
+        //.on("dblclick.zoom", null)
         //.scaleExtent([ 150, 1000 ])
-        //.translateExtent([[ -1200, -700 ], [ 1200, 700 ]])
+
         .on("end", () => {
           dragging = false;
         })
@@ -142,7 +151,7 @@
     .translate([$xPos, $yPos])
     .scale([$kPos]);
 
-  $: console.log({ $rootK, $zoomK, $kPos });
+  $: console.log({ $xPos, $rootX, $yPos, $rootY, $zoomK });
   // same for the path-generator.
   $: path = geoPath(projection);
 
@@ -153,11 +162,37 @@
     const zoomDuration = Math.min($kPos, 4000);
 
     // if zoomed in more, take longer to zoom out
-    zoomK.set(1, { duration: zoomDuration });
+    kPos.set($rootK, { duration: zoomDuration });
+    zoomK.set(1);
     xPos.set($rootX);
     yPos.set($rootY);
   };
 
+  function handleZoomOut() {
+    // only zoom further out if subtracting 1
+    // is at least 0.8
+    if ($zoomK >= 1.8) {
+      $zoomK -= 1;
+
+      // if it would be less, set to 0.8
+      // the min. value.
+    } else {
+      $zoomK = 0.8;
+    }
+  }
+
+  function handleZoomIn() {
+    // only zoom further out if subtracting 1
+    // is at least 0.8
+    if ($zoomK <= 7) {
+      $zoomK += 1;
+
+      // if it would be less, set to 0.8
+      // the min. value.
+    } else {
+      $zoomK = 8;
+    }
+  }
   // helper to slightly scale stars on zoom
   $: magFactor = Math.sqrt($kPos / initial.k);
 
@@ -187,9 +222,11 @@
   </aside>
 {/if}
 <h3>This is a different map. Better? {star_id}</h3>
-<div class="chart-container" bind:clientWidth={width} use:resize={onResize}>
+<div class="chart-container">
   <div
     class="map"
+    bind:clientWidth={width}
+    use:resize={onResize}
     bind:this={starmap}
     on:mouseleave={() => (hoveredData = undefined)}
   >
@@ -230,11 +267,45 @@
     </Canvas>
   </div>
   <div class="controls">
-    <button id="zoom-reset" on:click={handleReset}>Reset</button>
+    <button
+      disabled={$kPos == $rootK && $xPos == $rootX && $yPos == $rootY
+        ? true
+        : false}
+      title={$kPos == $rootK && $xPos == $rootX && $yPos == $rootY
+        ? "You're already in the Reset-Position"
+        : "Reset zoom and position"}
+      id="zoom-reset"
+      on:click={handleReset}>Reset</button
+    >
 
+    <div class="pan-control">
+      <PanButton
+        {width}
+        {height}
+        direction="right"
+        fun={() => ($xPos -= 150)}
+      />
+      <PanButton {width} {height} direction="left" fun={() => ($xPos += 150)} />
+      <PanButton {width} {height} direction="up" fun={() => ($yPos += 150)} />
+      <PanButton {width} {height} direction="down" fun={() => ($yPos -= 150)} />
+    </div>
     <div class="zoom-control">
-      <button id="zoom-in" on:click={() => ($zoomK += 0.5)}> &#43; </button>
-      <button id="zoom-out" on:click={() => ($zoomK -= 0.5)}> &#8722; </button>
+      <button
+        disabled={$zoomK >= 8 ? true : false}
+        title={$zoomK >= 8 ? "You're all zoomed in" : "Zoom in"}
+        id="zoom-in"
+        on:click={handleZoomIn}
+      >
+        &#43;
+      </button>
+      <button
+        disabled={$zoomK <= 0.8 ? true : false}
+        title={$zoomK <= 0.8 ? "You're all zoomed out" : "Zoom out"}
+        id="zoom-out"
+        on:click={handleZoomOut}
+      >
+        &#8722;
+      </button>
     </div>
   </div>
 
@@ -270,6 +341,11 @@
   button {
     font-family: var(--primaryFont);
     font-size: var(--step-0);
+  }
+
+  button:disabled,
+  button[disabled] {
+    background-color: var(--grey);
   }
 
   .warning {
