@@ -3,7 +3,7 @@
   import { onMount } from "svelte";
   import { writable } from "svelte/store";
   import { tweened } from "svelte/motion";
-  import { cubicOut } from "svelte/easing";
+  import { sine } from "svelte/easing";
   import { Canvas } from "svelte-canvas";
   import { select } from "d3-selection";
   import { zoom } from "d3-zoom";
@@ -50,8 +50,8 @@
   let yPos = writable(initial.y);
 
   let kPos = tweened(initial.k, {
-    duration: 800,
-    easing: cubicOut,
+    duration: 500,
+    easing: sine,
   });
 
   // handle zooming & panning
@@ -232,8 +232,8 @@
     <button id="zoom-reset" on:click={handleReset}>Reset</button>
 
     <div class="zoom-control">
-      <button id="zoom-in" on:click={() => ($zoomK += 0.3)}> &#43; </button>
-      <button id="zoom-out" on:click={() => ($zoomK -= 0.3)}> &#8722; </button>
+      <button id="zoom-in" on:click={() => ($zoomK += 0.5)}> &#43; </button>
+      <button id="zoom-out" on:click={() => ($zoomK -= 0.5)}> &#8722; </button>
     </div>
   </div>
 

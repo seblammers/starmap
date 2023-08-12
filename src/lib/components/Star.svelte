@@ -11,10 +11,8 @@
 
   $: render = ({ context }) => {
     context.fillStyle = fill;
-    context.strokeStyle = stroke;
-    context.lineWidth = strokeWidth;
     context.beginPath();
-    context.arc(x, y, r + strokeWidth / 2, 0, 2 * Math.PI);
+    context.arc(x, y, r, 0, 2 * Math.PI);
     context.fill();
 
     if (glow) {
@@ -27,6 +25,9 @@
       gradient.addColorStop(1, "rgb(255, 255, 255, 1)");
 
       context.fillStyle = gradient;
+      context.strokeStyle = stroke;
+      context.lineWidth = strokeWidth;
+      context.arc(x, y, r + strokeWidth / 2, 0, 2 * Math.PI);
       context.stroke();
       context.fill();
     }
