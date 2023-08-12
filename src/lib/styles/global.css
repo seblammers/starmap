@@ -54,6 +54,7 @@
     --accent: hsl(238, 80%, 66%);
     --light: hsl(238, 80%, 96%);
     --light-bright: hsl(238, 98%, 98%);
+    --grey: hsl(238, 13%, 53%);
     --radius: 0.5rem;
     --border-radius: var(--step-1);
     
@@ -182,8 +183,8 @@ body {
     transition-duration: 0.5s;
   }
 
-  button:hover,
-  button:focus {
+  button:hover:enabled,
+  button:focus:enabled {
     color: var(--light);
     background: var(--accent);
     border-color: var(--accent);
