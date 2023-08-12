@@ -267,17 +267,6 @@
     </Canvas>
   </div>
   <div class="controls">
-    <button
-      disabled={$kPos == $rootK && $xPos == $rootX && $yPos == $rootY
-        ? true
-        : false}
-      title={$kPos == $rootK && $xPos == $rootX && $yPos == $rootY
-        ? "You're already in the Reset-Position"
-        : "Reset zoom and position"}
-      id="zoom-reset"
-      on:click={handleReset}>Reset</button
-    >
-
     <div class="pan-control">
       <PanButton
         {width}
@@ -290,6 +279,16 @@
       <PanButton {width} {height} direction="down" fun={() => ($yPos -= 150)} />
     </div>
     <div class="zoom-control">
+      <button
+        disabled={$kPos == $rootK && $xPos == $rootX && $yPos == $rootY
+          ? true
+          : false}
+        title={$kPos == $rootK && $xPos == $rootX && $yPos == $rootY
+          ? "You're already in the Reset-Position"
+          : "Reset zoom and position"}
+        id="zoom-reset"
+        on:click={handleReset}>Reset</button
+      >
       <button
         disabled={$zoomK >= 8 ? true : false}
         title={$zoomK >= 8 ? "You're all zoomed in" : "Zoom in"}
@@ -327,6 +326,7 @@
   .zoom-control {
     display: flex;
     flex-direction: row;
+    margin-top: var(--space-s);
   }
   svg {
     background-color: var(--dark);

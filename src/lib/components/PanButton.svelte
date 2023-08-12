@@ -16,10 +16,10 @@
       xPosition = 0 - xNudge;
       yPosition = height / 2 - yNudge;
     } else if (direction == "up") {
-      xPosition = width / 2;
+      xPosition = width / 2 - xNudge;
       yPosition = 0 - yNudge;
     } else if (direction == "down") {
-      xPosition = width / 2;
+      xPosition = width / 2 - xNudge;
       yPosition = height - yNudge;
     }
   }
