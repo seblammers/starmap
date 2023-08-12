@@ -3,7 +3,7 @@
   import { onMount } from "svelte";
   import { writable } from "svelte/store";
   import { tweened } from "svelte/motion";
-  import { sine } from "svelte/easing";
+  import { sineIn } from "svelte/easing";
   import { Canvas } from "svelte-canvas";
   import { select } from "d3-selection";
   import { zoom } from "d3-zoom";
@@ -51,7 +51,7 @@
 
   let kPos = tweened(initial.k, {
     duration: 500,
-    easing: sine,
+    easing: sineIn,
   });
 
   // handle zooming & panning
@@ -181,7 +181,7 @@
 
 {#if width < 900}
   <aside class="warning">
-    I see you are viewing this on a relatively small screen. Feel free to
+    It seems you are viewing this on a relatively small screen. Feel free to
     explore with your current device, but please consider coming back on a big
     screen to get the most out of this experience.
   </aside>
@@ -213,6 +213,7 @@
           y={projection(s.geometry.coordinates)[1]}
           fill="white"
           stroke="null"
+          strokeWidth="0"
           r={hoveredData == s ? size * 2 : size}
         />
         {#if hoveredData == s}
