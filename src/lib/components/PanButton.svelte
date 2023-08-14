@@ -4,7 +4,7 @@
   export let width;
   export let height;
 
-  const xNudge = 15;
+  const xNudge = 20;
   const yNudge = 40;
   let xPosition, yPosition;
 
@@ -67,6 +67,8 @@
 
 <style>
   button {
+    background: var(--light-transparent);
+    color: var(--light);
     padding: var(--space-2xs);
     font-family: var(--primaryFont);
   }
