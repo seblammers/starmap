@@ -13,6 +13,7 @@
   import Tooltip from "./Tooltip.svelte";
   import VoronoiCanvas from "./VoronoiCanvas.svelte";
   import PanButton from "./PanButton.svelte";
+  import PanButtonGrid from "./PanButtonGrid.svelte";
 
   // new try for voronoi
   $: voronoi = geoVoronoi(
@@ -265,12 +266,7 @@
       {/each}
     </Canvas>
   </div>
-  <div class="pan-control">
-    <PanButton {width} {height} direction="right" fun={() => ($xPos -= 150)} />
-    <PanButton {width} {height} direction="left" fun={() => ($xPos += 150)} />
-    <PanButton {width} {height} direction="up" fun={() => ($yPos += 150)} />
-    <PanButton {width} {height} direction="down" fun={() => ($yPos -= 150)} />
-  </div>
+
   <div class="controls">
     <div class="zoom-control">
       <button
@@ -283,22 +279,46 @@
         id="zoom-reset"
         on:click={handleReset}>Reset</button
       >
-      <button
-        disabled={$zoomK >= 8 ? true : false}
-        title={$zoomK >= 8 ? "You're all zoomed in" : "Zoom in"}
-        id="zoom-in"
-        on:click={handleZoomIn}
-      >
-        &#43;
-      </button>
-      <button
-        disabled={$zoomK <= 0.8 ? true : false}
-        title={$zoomK <= 0.8 ? "You're all zoomed out" : "Zoom out"}
-        id="zoom-out"
-        on:click={handleZoomOut}
-      >
-        &#8722;
-      </button>
+      <PanButtonGrid {xPos} {yPos} />
+      <!-- <div class="pan-control">
+        <PanButton
+          {width}
+          {height}
+          direction="right"
+          fun={() => ($xPos -= 150)}
+        />
+        <PanButton
+          {width}
+          {height}
+          direction="left"
+          fun={() => ($xPos += 150)}
+        />
+        <PanButton {width} {height} direction="up" fun={() => ($yPos += 150)} />
+        <PanButton
+          {width}
+          {height}
+          direction="down"
+          fun={() => ($yPos -= 150)}
+        />
+      </div> -->
+      <div>
+        <button
+          disabled={$zoomK >= 8 ? true : false}
+          title={$zoomK >= 8 ? "You're all zoomed in" : "Zoom in"}
+          id="zoom-in"
+          on:click={handleZoomIn}
+        >
+          &#43;
+        </button>
+        <button
+          disabled={$zoomK <= 0.8 ? true : false}
+          title={$zoomK <= 0.8 ? "You're all zoomed out" : "Zoom out"}
+          id="zoom-out"
+          on:click={handleZoomOut}
+        >
+          &#8722;
+        </button>
+      </div>
     </div>
   </div>
 
@@ -314,9 +334,9 @@
     justify-content: flex-end;
   }
 
-  #zoom-reset {
+  /* #zoom-reset {
     margin-right: var(--space-l);
-  }
+  } */
   .zoom-control {
     display: flex;
     flex-direction: row;

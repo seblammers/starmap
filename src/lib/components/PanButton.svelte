@@ -4,7 +4,7 @@
   export let width;
   export let height;
 
-  const xNudge = 20;
+  const xNudge = 15;
   const yNudge = 40;
   let xPosition, yPosition;
 
@@ -26,41 +26,16 @@
 </script>
 
 {#if direction == "right"}
-  <button
-    style="position: absolute; top: {yPosition}px; left: {xPosition}px"
-    title={"Pan right"}
-    id="pan-right"
-    on:click={fun}
-  >
-    &#8594;
-  </button>
+  <button title={"Pan right"} id="pan-right" on:click={fun}> &#8594; </button>
 {:else if direction == "left"}
-  <button
-    style="position: absolute; top: {yPosition}px; left: {xPosition}px"
-    title={"Pan left"}
-    id="pan-left"
-    on:click={fun}
-  >
-    &#8592;
-  </button>
+  <button title={"Pan left"} id="pan-left" on:click={fun}> &#8592; </button>
 {:else if direction == "up"}
-  <button
-    style="position: absolute; top: {yPosition}px; left: {xPosition}px"
-    class="pad"
-    title={"Pan up"}
-    id="pan-up"
-    on:click={fun}
-  >
+  <button class="pad" title={"Pan up"} id="pan-up" on:click={fun}>
     &#8593;
   </button>
 {:else if direction == "down"}
-  <button
-    style="position: absolute; top: {yPosition}px; left: {xPosition}px"
-    class="pad"
-    title={"Pan down"}
-    id="pan-down"
-    on:click={fun}
-  >
+  <!-- style="position: absolute; top: {yPosition}px; left: {xPosition}px" -->
+  <button class="pad" title={"Pan down"} id="pan-down" on:click={fun}>
     &#8595;
   </button>
 {/if}
@@ -69,7 +44,10 @@
   button {
     background: var(--light-transparent);
     color: var(--light);
+    min-height: var(--space-2xs);
+    min-width: var(--space-2xs);
     padding: var(--space-2xs);
+    padding: var(--space-2xs) var(--space-s);
     font-family: var(--primaryFont);
   }
   .pad {

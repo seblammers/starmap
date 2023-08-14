@@ -66,6 +66,9 @@
 	  --primaryFont: 'Roboto', -apple-system, BlinkMacSystemFont, 'avenir next', 'avenir', 'segoe ui', 'helvetica neue', helvetica, 'Cantarell', 'Ubuntu', 'roboto', 'noto', 'arial', sans-serif;
 }
 
+* {
+  border: solid 1px tomato;
+}
 body {
   background-color: var(--dark);
   color: var(--light);
@@ -171,7 +174,7 @@ body {
   button,
   input[type=submit] {
     font-size: var(--step-1);
-    padding: var(--space-s) var(--space-m);
+    padding: var(--space-s) var(--space-s);
     background: var(--light);
     color: var(--dark);
     text-decoration: none;
@@ -182,6 +185,10 @@ body {
     width: max-content;
     transition-property: all;
     transition-duration: 0.5s;
+    max-height: var(--space-xl);
+    max-width: var(--space-xl);
+    min-height: var(--space-l);
+    min-width: var(--space-l);
   }
 
   button:hover:enabled,
