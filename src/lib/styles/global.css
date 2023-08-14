@@ -53,6 +53,7 @@
     --dark: hsl(238, 80%, 6%);
     --accent: hsl(238, 80%, 66%);
     --light: hsl(238, 80%, 96%);
+    --light-transparent: hsl(238, 80%, 96%, 0.2);
     --light-bright: hsl(238, 98%, 98%);
     --grey: hsl(238, 13%, 53%);
     --radius: 0.5rem;
@@ -77,7 +78,7 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 	-webkit-font-smoothing: antialiased;
 	overflow: scroll;
-	overflow-x: hidden;
+	/* overflow-x: hidden; */
 }
 
 ::selection {
