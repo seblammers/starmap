@@ -12,7 +12,6 @@
   import { geoVoronoi } from "d3-geo-voronoi";
   import Tooltip from "./Tooltip.svelte";
   import VoronoiCanvas from "./VoronoiCanvas.svelte";
-  import Glow from "./Glow.svelte";
   import PanButton from "./PanButton.svelte";
 
   // new try for voronoi
@@ -266,18 +265,13 @@
       {/each}
     </Canvas>
   </div>
+  <div class="pan-control">
+    <PanButton {width} {height} direction="right" fun={() => ($xPos -= 150)} />
+    <PanButton {width} {height} direction="left" fun={() => ($xPos += 150)} />
+    <PanButton {width} {height} direction="up" fun={() => ($yPos += 150)} />
+    <PanButton {width} {height} direction="down" fun={() => ($yPos -= 150)} />
+  </div>
   <div class="controls">
-    <div class="pan-control">
-      <PanButton
-        {width}
-        {height}
-        direction="right"
-        fun={() => ($xPos -= 150)}
-      />
-      <PanButton {width} {height} direction="left" fun={() => ($xPos += 150)} />
-      <PanButton {width} {height} direction="up" fun={() => ($yPos += 150)} />
-      <PanButton {width} {height} direction="down" fun={() => ($yPos -= 150)} />
-    </div>
     <div class="zoom-control">
       <button
         disabled={$kPos == $rootK && $xPos == $rootX && $yPos == $rootY
