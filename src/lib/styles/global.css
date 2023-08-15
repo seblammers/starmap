@@ -43,6 +43,7 @@
   
     --max-width: 60ch;
     --gutter: var(--space-s-m);
+    --grid-gutter: var(--space-s-l, clamp(1.13rem, calc(0.32rem + 3.97vw), 2.50rem));
     --transition-base: 250ms ease;
     --transition-movement: 200ms linear;
     --transition-fade: 200ms ease;
@@ -181,7 +182,7 @@ body {
     text-align: center;
     border: 2px solid var(--dark);
     border-radius: var(--radius);
-    margin: var(--space-s) 0 var(--space-s);
+    /* margin: var(--space-s) 0 var(--space-s); */
     display: block;
     width: max-content;
     transition-property: all;
