@@ -267,59 +267,53 @@
     </Canvas>
   </div>
 
-  <div class="controls">
-    <div class="zoom-control">
-      <button
-        disabled={$kPos == $rootK && $xPos == $rootX && $yPos == $rootY
-          ? true
-          : false}
-        title={$kPos == $rootK && $xPos == $rootX && $yPos == $rootY
-          ? "You're already in the Reset-Position"
-          : "Reset zoom and position"}
-        id="zoom-reset"
-        on:click={handleReset}>Reset</button
-      >
-      <PanButtonGrid {xPos} {yPos} />
-      <!-- <div class="pan-control">
-        <PanButton
-          {width}
-          {height}
-          direction="right"
-          fun={() => ($xPos -= 150)}
-        />
-        <PanButton
-          {width}
-          {height}
-          direction="left"
-          fun={() => ($xPos += 150)}
-        />
-        <PanButton {width} {height} direction="up" fun={() => ($yPos += 150)} />
-        <PanButton
-          {width}
-          {height}
-          direction="down"
-          fun={() => ($yPos -= 150)}
-        />
-      </div> -->
-      <div>
-        <button
-          disabled={$zoomK >= 8 ? true : false}
-          title={$zoomK >= 8 ? "You're all zoomed in" : "Zoom in"}
-          id="zoom-in"
-          on:click={handleZoomIn}
-        >
-          &#43;
-        </button>
-        <button
-          disabled={$zoomK <= 0.8 ? true : false}
-          title={$zoomK <= 0.8 ? "You're all zoomed out" : "Zoom out"}
-          id="zoom-out"
-          on:click={handleZoomOut}
-        >
-          &#8722;
-        </button>
-      </div>
-    </div>
+  <div class="control-grid">
+    <!-- <div class="zoom-control"> -->
+    <button
+      title="Randomize"
+      id="randomize"
+      on:click={() => console.log("Randomize!")}>[*]</button
+    >
+    <button
+      disabled={$kPos == $rootK && $xPos == $rootX && $yPos == $rootY
+        ? true
+        : false}
+      title={$kPos == $rootK && $xPos == $rootX && $yPos == $rootY
+        ? "You're already in the Reset-Position"
+        : "Reset zoom and position"}
+      id="reset"
+      on:click={handleReset}>Reset</button
+    >
+    <button title={"Pan right"} id="pan-right" on:click={() => ($xPos -= 150)}
+      >&#x25B6;</button
+    >
+
+    <button title={"Pan left"} id="pan-left" on:click={() => ($xPos += 150)}
+      >&#x25C0;</button
+    >
+
+    <button title={"Pan up"} id="pan-up" on:click={() => ($yPos += 150)}
+      >&#x25B2;</button
+    >
+    <button title={"Pan down"} id="pan-down" on:click={() => ($yPos -= 150)}
+      >&#x25BC;</button
+    >
+    <button
+      disabled={$zoomK >= 8 ? true : false}
+      title={$zoomK >= 8 ? "You're all zoomed in" : "Zoom in"}
+      id="zoom-in"
+      on:click={handleZoomIn}
+    >
+      &#43;
+    </button>
+    <button
+      disabled={$zoomK <= 0.8 ? true : false}
+      title={$zoomK <= 0.8 ? "You're all zoomed out" : "Zoom out"}
+      id="zoom-out"
+      on:click={handleZoomOut}
+    >
+      &#8722;
+    </button>
   </div>
 
   {#if hoveredData}
@@ -328,6 +322,43 @@
 </div>
 
 <style>
+  .control-grid {
+    display: grid;
+    grid-template-columns: repeat(7, var(--space-2xs));
+    grid-template-rows: repeat(2, var(--space-l));
+    grid-column-gap: var(--space-l);
+    grid-row-gap: var(--space-xs);
+    min-width: 30vw;
+    max-width: 80vw;
+    align-content: center;
+    justify-content: center;
+  }
+
+  #randomize {
+    grid-area: 1 / 1 / 2 / 2;
+    font-family: var(--accentFont);
+  }
+  #reset {
+    grid-area: 2 / 1 / 3 / 2;
+  }
+  #pan-up {
+    grid-area: 1 / 4 / 2 / 5;
+  }
+  #pan-left {
+    grid-area: 2 / 3 / 3 / 4;
+  }
+  #pan-down {
+    grid-area: 2 / 4 / 3 / 5;
+  }
+  #pan-right {
+    grid-area: 2 / 5 / 3 / 6;
+  }
+  #zoom-in {
+    grid-area: 1 / 7 / 2 / 8;
+  }
+  #zoom-out {
+    grid-area: 2 / 7 / 3 / 8;
+  }
   .controls {
     display: flex;
     flex-direction: row;

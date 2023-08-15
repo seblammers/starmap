@@ -60,7 +60,7 @@
 <style>
   .mobile {
     position: relative !important;
-    top: 0px !important;
+    top: var(--space-m) !important;
     left: 0px !important;
     max-width: inherit !important;
   }

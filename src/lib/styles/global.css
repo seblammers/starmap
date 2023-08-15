@@ -66,9 +66,9 @@
 	  --primaryFont: 'Roboto', -apple-system, BlinkMacSystemFont, 'avenir next', 'avenir', 'segoe ui', 'helvetica neue', helvetica, 'Cantarell', 'Ubuntu', 'roboto', 'noto', 'arial', sans-serif;
 }
 
-* {
+/* * {
   border: solid 1px tomato;
-}
+} */
 body {
   background-color: var(--dark);
   color: var(--light);
@@ -174,10 +174,11 @@ body {
   button,
   input[type=submit] {
     font-size: var(--step-1);
-    padding: var(--space-s) var(--space-s);
+    /* padding: var(--space-s) var(--space-s); */
     background: var(--light);
     color: var(--dark);
     text-decoration: none;
+    text-align: center;
     border: 2px solid var(--dark);
     border-radius: var(--radius);
     margin: var(--space-s) 0 var(--space-s);
