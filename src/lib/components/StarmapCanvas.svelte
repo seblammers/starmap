@@ -360,6 +360,7 @@
   .u-container {
     padding-inline: var(--grid-gutter);
     margin-inline: auto;
+    margin-top: var(--space-s);
   }
   .control-grid {
     display: grid;
