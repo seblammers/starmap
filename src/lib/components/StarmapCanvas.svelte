@@ -9,30 +9,9 @@
   import { zoom } from "d3-zoom";
   import { resize } from "svelte-resize-observer-action";
   import Star from "./Star.svelte";
-  import { geoVoronoi } from "d3-geo-voronoi";
   import Tooltip from "./Tooltip.svelte";
   import VoronoiCanvas from "./VoronoiCanvas.svelte";
-  import PanButton from "./PanButton.svelte";
-  import PanButtonGrid from "./PanButtonGrid.svelte";
 
-  // new try for voronoi
-  $: voronoi = geoVoronoi(
-    data.features.map((d) => {
-      return [d.geometry.coordinates[0][0], d.geometry.coordinates[1][0]];
-    })
-  );
-
-  //   $: star_id = voronoi.find(
-  //       cell.properties.site[0],
-  //       cell.properties.site[1]
-  //     );
-  let star_id = "";
-  let hoveredData;
-  function handleMouseMove(event) {
-    console.log(event);
-    star_id = voronoi.find(1 - (event.clientX - 8), 1 - (event.clientY - 8));
-    hoveredData = data.features[star_id];
-  }
   // fetch star data
   export let data;
 
@@ -128,30 +107,24 @@
           [-(width / 2), -(height / 2)],
           [width, height],
         ])
-        .on("zoom", zooming)
-        //.on("dblclick.zoom", null)
-        //.scaleExtent([ 150, 1000 ])
+      //.on("zoom", zooming)
+      //.on("dblclick.zoom", null)
+      //.scaleExtent([ 150, 1000 ])
 
-        .on("end", () => {
-          dragging = false;
-        })
+      // .on("end", () => {
+      //   dragging = false;
+      // })
     );
   });
 
   // set projection and keep it updated
   // when one of the values change.
-  $: projection = geoEquirectangular()
-    // .fitExtent(
-    //   [
-    //     [10, 10],
-    //     [width - padding, height - padding],
-    //   ],
-    //   data
-    // )
-    .translate([$xPos, $yPos])
-    .scale([$kPos]);
+  $: projection = geoEquirectangular().translate([$xPos, $yPos]).scale([$kPos]);
 
+  $: console.log({ $xPos, $yPos, $kPos });
+  $: console.log({ $rootX, $rootY, $rootK });
   $: console.log({ $zoomX, $zoomY, $zoomK });
+
   // same for the path-generator.
   $: path = geoPath(projection);
 
@@ -168,7 +141,7 @@
     yPos.set($rootY);
   };
 
-  // to shuffle the order of x and y-coordinates
+  // to shuffle the order of random positions,
   // we use a Fisher–Yates shuffle
   // h/t Mike Bostock: https://bost.ocks.org/mike/shuffle/compare.html
   function shuffle(array) {
@@ -184,6 +157,7 @@
     return array;
   }
 
+  // some random positions
   let possibilities = [
     { x: 270, y: -168, k: 4.4 },
     { x: 182, y: -15, k: 8 },
@@ -196,17 +170,26 @@
     { x: -172, y: -231, k: 4.3 },
   ];
 
+  // shuffled on page load
   possibilities = shuffle(possibilities);
 
+  // keep track of current index
   let current = 0;
+
+  // handle randomization:
+  // - increment index until max, then
+  //   reset to 0
+  // - apply random positions
   let handleRandomize = () => {
     zoomX.set(possibilities[current].x);
     zoomY.set(possibilities[current].y);
     zoomK.set(possibilities[current].k);
 
     if (current < possibilities.length - 1) {
+      // increment until last entry
       current += 1;
     } else {
+      // then reset
       current = 0;
     }
   };
@@ -239,9 +222,7 @@
   // helper to slightly scale stars on zoom
   $: magFactor = Math.sqrt($kPos / initial.k);
 
-  // keep track of hovered stars
-  //$: hoveredData = data.features[star_id];
-
+  let hoveredData;
   // handle voronoi-hover
   function sethoveredData(d) {
     hoveredData = data.features[d.detail];
@@ -264,7 +245,7 @@
     screen to get the most out of this experience.
   </aside>
 {/if}
-<h3>This is a different map. Better? {star_id}</h3>
+
 <div class="chart-container">
   <div
     class="map"
@@ -280,11 +261,7 @@
       {path}
       on:voronoi-mouseover={sethoveredData}
     />
-    <Canvas
-      {width}
-      {height}
-      style={dragging ? "cursor: grabbing" : "cursor: pointer"}
-    >
+    <Canvas {width} {height} style="cursor: pointer">
       {#each data.features as s}
         {@const size = starSize(s) * magFactor}
 
@@ -312,9 +289,10 @@
 
   <div class="u-container">
     <div class="control-grid">
-      <!-- <div class="zoom-control"> -->
-      <button title="Randomize" id="randomize" on:click={handleRandomize}
-        >[*]</button
+      <button
+        title="Randomize zoom and position"
+        id="randomize"
+        on:click={handleRandomize}>[*]</button
       >
       <button
         disabled={$kPos == $rootK && $xPos == $rootX && $yPos == $rootY
@@ -326,19 +304,33 @@
         id="reset"
         on:click={handleReset}>&#x21ba;</button
       >
-      <button title={"Pan right"} id="pan-right" on:click={() => ($xPos -= 150)}
-        >&#x25B6;</button
+      <button
+        disabled={$xPos < -($rootX * 10) ? true : false}
+        title={$xPos < -($rootX * 10) ? "That's enough." : "Pan right"}
+        id="pan-right"
+        on:click={() => ($zoomX -= 150)}>&#x25B6;</button
       >
 
-      <button title={"Pan left"} id="pan-left" on:click={() => ($xPos += 150)}
-        >&#x25C0;</button
+      <button
+        disabled={$xPos > $rootX * 10 ? true : false}
+        title={$xPos > $rootX * 10 ? "Nothing to see there." : "Pan left"}
+        id="pan-left"
+        on:click={() => ($zoomX += 150)}>&#x25C0;</button
       >
 
-      <button title={"Pan up"} id="pan-up" on:click={() => ($yPos += 150)}
-        >&#x25B2;</button
+      <button
+        disabled={$yPos > $rootY * 10 ? true : false}
+        title={$yPos > $rootY * 10 ? "Ok, you've had enough." : "Pan up"}
+        id="pan-up"
+        on:click={() => ($zoomY += 150)}>&#x25B2;</button
       >
-      <button title={"Pan down"} id="pan-down" on:click={() => ($yPos -= 150)}
-        >&#x25BC;</button
+      <button
+        disabled={$yPos < -($rootY * 10) ? true : false}
+        title={$yPos < -($rootY * 10)
+          ? "Stop it with this direction."
+          : "Pan down"}
+        id="pan-down"
+        on:click={() => ($zoomY -= 150)}>&#x25BC;</button
       >
       <button
         disabled={$zoomK >= 8 ? true : false}
