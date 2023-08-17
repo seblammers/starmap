@@ -1,7 +1,6 @@
 <h2 id="methods">Methods</h2>
 
 <p>Data were collected and merged from 3 sources:</p>
-
 <ol>
   <li>
     <a href="https://github.com/ofrohn/d3-celestial" target="_blank"
@@ -21,6 +20,26 @@
   </li>
 </ol>
 
+<br />
+
+<p>
+  This site is powered by
+  <a href="https://kit.svelte.dev/" target="_blank">SvelteKit</a>. The map is
+  built with
+  <a href="https://svelte.dev/" target="_blank">Svelte</a>
+  & <a href="https://d3js.org/" target="_blank">d3</a>.
+</p>
+
+<p>
+  The fonts used throughout are
+  <a href="https://andada.huertatipografica.com/" target="_blank"
+    ><em>Andada Pro</em></a
+  >
+  &
+  <a href="https://en.wikipedia.org/wiki/Roboto" target="_blank"
+    ><span class="roboto">Roboto</span></a
+  >.
+</p>
 <p>
   For more details, feel free to check out the code for <a
     href="https://github.com/seblammers/starmap"
@@ -31,5 +50,9 @@
 <style>
   .grey {
     color: var(--grey);
+  }
+  .roboto {
+    font-family: var(--primaryFont);
+    font-weight: 700;
   }
 </style>
