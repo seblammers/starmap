@@ -308,21 +308,21 @@
         disabled={$xPos < -($rootX * 10) ? true : false}
         title={$xPos < -($rootX * 10) ? "That's enough." : "Pan right"}
         id="pan-right"
-        on:click={() => ($zoomX -= 150)}>&#x25B6;</button
+        on:click={() => ($zoomX -= 250)}>&#x25B6;</button
       >
 
       <button
         disabled={$xPos > $rootX * 10 ? true : false}
         title={$xPos > $rootX * 10 ? "Nothing to see there." : "Pan left"}
         id="pan-left"
-        on:click={() => ($zoomX += 150)}>&#x25C0;</button
+        on:click={() => ($zoomX += 250)}>&#x25C0;</button
       >
 
       <button
         disabled={$yPos > $rootY * 10 ? true : false}
         title={$yPos > $rootY * 10 ? "Ok, you've had enough." : "Pan up"}
         id="pan-up"
-        on:click={() => ($zoomY += 150)}>&#x25B2;</button
+        on:click={() => ($zoomY += 250)}>&#x25B2;</button
       >
       <button
         disabled={$yPos < -($rootY * 10) ? true : false}
@@ -330,7 +330,7 @@
           ? "Stop it with this direction."
           : "Pan down"}
         id="pan-down"
-        on:click={() => ($zoomY -= 150)}>&#x25BC;</button
+        on:click={() => ($zoomY -= 250)}>&#x25BC;</button
       >
       <button
         disabled={$zoomK >= 8 ? true : false}
