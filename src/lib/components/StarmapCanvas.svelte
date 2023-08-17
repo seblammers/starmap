@@ -248,7 +248,7 @@
 
 <div class="chart-container">
   <div
-    class="map"
+    id="map"
     bind:clientWidth={width}
     use:resize={onResize}
     bind:this={starmap}

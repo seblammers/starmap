@@ -5,19 +5,19 @@
 <ol>
   <li>
     <a href="https://github.com/ofrohn/d3-celestial" target="_blank"
-      >d3 celestial</a
-    >
+      >d3-celestial</a
+    > <span class="grey">for coordinates.</span>
   </li>
   <li>
     <a href="https://github.com/astronexus/HYG-Database" target="_blank"
       >HYG Database</a
-    >
+    > <span class="grey">for distances.</span>
   </li>
   <li>
     <a
       href="https://en.wikipedia.org/wiki/Timelines_of_world_history"
       target="_blank">Wikipedia</a
-    >
+    > <span class="grey">for historic events.</span>
   </li>
 </ol>
 
@@ -27,3 +27,9 @@
     target="_blank">this project on Github</a
   >.
 </p>
+
+<style>
+  .grey {
+    color: var(--grey);
+  }
+</style>

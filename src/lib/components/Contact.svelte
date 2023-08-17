@@ -35,6 +35,7 @@
   </div>
 
   <input type="submit" value="Submit" class="align-right" />
+  <a class="button-standard" href="/#map">&larr; Go back to the map</a>
 </form>
 
 <style>
@@ -42,20 +43,25 @@
     font-weight: bold;
     display: inline-block;
   }
-  input {
+  input,
+  textarea {
     display: block;
     font-size: inherit;
     padding: var(--space-2xs);
     border-radius: var(--radius);
-    border: 1px solid var(--accent);
+    border: 1px solid var(--light);
     width: 100%;
     accent-color: var(--accent);
     background-color: var(--light);
   }
-  input[type="submit"] {
+  input[type="submit"],
+  .button-standard {
     padding: var(--space-s) var(--space-s);
     margin: var(--space-s) 0 var(--space-s);
     max-width: fit-content;
     float: right;
+  }
+  .button-standard {
+    float: left;
   }
 </style>
