@@ -38,7 +38,20 @@
 </form>
 
 <style>
-  button,
+  label {
+    font-weight: bold;
+    display: inline-block;
+  }
+  input {
+    display: block;
+    font-size: inherit;
+    padding: var(--space-2xs);
+    border-radius: var(--radius);
+    border: 1px solid var(--accent);
+    width: 100%;
+    accent-color: var(--accent);
+    background-color: var(--light);
+  }
   input[type="submit"] {
     padding: var(--space-s) var(--space-s);
     margin: var(--space-s) 0 var(--space-s);

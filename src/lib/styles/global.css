@@ -220,25 +220,3 @@ body {
   .spacer {
     height: 10vh;
   }
-
-  label,
-  fieldset {
-    font-weight: bold;
-    display: inline-block;
-  }
-  
-  fieldset {
-    padding: 0;
-    border: 0;
-  }
-  
-  input {
-    display: block;
-    font-size: inherit;
-    padding: var(--space-2xs);
-    border-radius: var(--radius);
-    border: 1px solid var(--accent);
-    width: 100%;
-    accent-color: var(--accent);
-    background-color: var(--light);
-  }

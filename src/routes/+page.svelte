@@ -20,8 +20,6 @@
 
 <StarmapCanvas data={stardata} />
 
-<div class="spacer" />
-
 <WrapUp />
 
 <Notes />

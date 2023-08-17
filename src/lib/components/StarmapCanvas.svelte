@@ -355,6 +355,7 @@
     <Tooltip data={hoveredData} {width} {projection} />
   {/if}
 </div>
+<div class="spacer" />
 
 <style>
   .u-container {
