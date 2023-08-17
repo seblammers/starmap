@@ -40,13 +40,13 @@
 <div class="spacer" />
 
 <p>
-  It takes the light just 8 min 19 s to go from the Sun to our eyes! So it makes
-  sense that we measure the vast distances of stars and other celestial bodies
-  in light years.
+  It takes the light just 8 min 19 s to go from the Sun to your eyes! So it
+  makes sense that we measure the vast distances of stars and other celestial
+  bodies in light years.
 </p>
 <p>
   What do you think, how many kms can light travel in one year? How much is "a
-  light year"? <UnitSpan
+  light year"? Let me tell you: <UnitSpan
     value={distanceLightYear}
     {handleClick}
     {isKm}
@@ -58,23 +58,6 @@
     formatString=",.3r"
   />.
 </p>
-
-<p>I know, these numbers are hard to grasp.</p>
-
-<p>
-  Let's make that more clear: Here is how long the light would need to travel
-  from the Sun to you <em>if one light year would take one second</em> (surprise,
-  it's super fast):
-</p>
-
-<DotPlot data={dataSun} />
-
-<p>
-  Compare that to one of the brightest Stars <em>Sirius</em>, which is 8.6 light
-  years away:
-</p>
-
-<DotPlot data={dataSirius} />
 
 <p>
   I think it is amazing to think about: The light from the stars traveled for
@@ -98,6 +81,12 @@
     ><a id="n2" href="#notes">2</a></sup
   >
   to the respective amount of light years.
+</p>
+<p>
+  The brighter stars are represented by larger circles. Those are the ones that
+  are best visible to the naked eye. That's also why they have proper names like <em
+    >Polaris</em
+  >, <em>Vega</em>, or <em>Sirius</em>.
 </p>
 
 <p>Which star tells the most interesting story to you?</p>
