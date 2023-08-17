@@ -35,7 +35,7 @@
   </div>
 
   <input type="submit" value="Submit" class="align-right" />
-  <a class="button-standard" href="/#map">&larr; Go back to the map</a>
+  <a class="button-standard" href="/#map">&larr; Back to the map</a>
 </form>
 
 <style>

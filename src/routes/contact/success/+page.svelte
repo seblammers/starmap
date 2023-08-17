@@ -7,7 +7,7 @@
 <p>Your message was sent to my inbox.</p>
 <br />
 
-<a class="button-standard" href="/#map">&larr; Go back to the map</a>
+<a class="button-standard" href="/#map">&larr; Back to the map</a>
 
 <style>
   .button-standard {
