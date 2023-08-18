@@ -5,5 +5,5 @@
   created already in 1050 BCE. And paper was invented in 200 BCE in the Han
   dynasty? Wow.
 </p>
-<p>If you enjoyed this too, <a href="/contact">let know</a>.</p>
+<p>If you enjoyed this too, <a href="/contact">let me know</a>.</p>
 <br />
