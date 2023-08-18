@@ -3,6 +3,7 @@
     &copy; {new Date().getFullYear()} Design & Development
   </p>
   <p class="no-top">
+    <a rel="me" href="https://vis.social/@seblammers" />
     <a
       href="https://www.sebastianlammers.com/"
       target="_blank"

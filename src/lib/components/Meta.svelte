@@ -9,7 +9,7 @@
   export let authorName = "Sebastian Lammers"; // Author name
   export let image = "https://storiesfromthenightsky.netlify.app/og-image.png"; // Open Graph image URL
   export let paymentPointer = ""; // Web Monetization payment pointer
-  export let datePublished = ""; // ISO 8601 format
+  export let datePublished = "2023‐08‐18"; // ISO 8601 format
   export let dateModified = ""; // ISO 8601 format
   export let contentType = "WebPage";
   export let language = "en";
