@@ -1,44 +1,30 @@
 <script>
-  import { format } from "d3-format";
+  // these are the props that need to be declared for the unit span:
+  // the numerical value
   export let value;
+  // the variable that keeps track of the current user-choice
   export let isKm;
+  // the function that handles the toggling
   export let handleClick;
+  // formatting has a default value, but can be specified individually
   export let formatString = ".3s";
+
+  // we import a helper from d3 to handle number formatting
+  import { format } from "d3-format";
   let formatter = format(formatString);
 
+  // the magic happens here:
   // toggle between unit-labels
   $: label = isKm ? "km" : "mi";
 
+  // and here:
   // toggle between km and miles
   $: shownValue = isKm ? value : value / 1.609334;
 
-  // extra bits for the labels
-  const title = "Click to toggle km / mi";
-  const options = ["km", "mi"];
-  const uniqueID = Math.floor(Math.random() * 100);
+  // title (shown on hover)
+  const title = "Tap to toggle km / mi";
 </script>
 
-<div
-  role="radiogroup"
-  class="group-container"
-  aria-labelledby={`label-${uniqueID}`}
-  id={`group-${uniqueID}`}
->
-  <div class="legend" id={`label-${uniqueID}`}>{title}</div>
-  <div>
-    {#each options as option}
-      <input
-        type="radio"
-        id={`${option}-${uniqueID}`}
-        value={option}
-        bind:group={isKm}
-      />
-      <label for={`${option}-${uniqueID}`}>
-        {option}
-      </label>
-    {/each}
-  </div>
-</div>
 <span
   role="button"
   tabindex="0"
