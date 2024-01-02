@@ -1,6 +1,6 @@
 <footer>
   <p>
-    &copy; {new Date().getFullYear()} Design & Development
+    &copy; 2023-{new Date().getFullYear()} Design & Development
   </p>
   <p class="no-top">
     <a rel="me" href="https://vis.social/@seblammers" />
