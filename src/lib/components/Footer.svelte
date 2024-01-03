@@ -39,6 +39,7 @@
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
+    text-align: center;
     padding: var(--space-m) var(--space-m);
     width: 100%;
   }
